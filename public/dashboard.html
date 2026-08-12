@@ -3674,5 +3674,49 @@
 })();
 </script>
 
+ <script>
+(function () {
+  "use strict";
+  const TZ = "Asia/Kolkata";
+
+  function pad(n) {
+    return String(n).padStart(2, "0");
+  }
+
+  function updateClocks() {
+    const now = new Date();
+    const timeOpts = {
+      timeZone: TZ,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false
+    };
+    const dateOpts = {
+      timeZone: TZ,
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    };
+
+    const timeStr = now.toLocaleTimeString("en-IN", timeOpts);
+    const dateStr = now.toLocaleDateString("en-IN", dateOpts);
+
+    const topClock = document.getElementById("topClock");
+    const bigClock = document.getElementById("bigClock");
+    const bigDate  = document.getElementById("bigDate");
+
+    if (topClock) topClock.textContent = timeStr;
+    if (bigClock) bigClock.textContent = timeStr;
+    if (bigDate)  bigDate.textContent  = dateStr;
+  }
+
+  // run immediately + every second
+  updateClocks();
+  setInterval(updateClocks, 1000);
+})();
+</script>
+
 </body>
 </html>
