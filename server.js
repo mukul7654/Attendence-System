@@ -29,10 +29,17 @@ seed();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// ==========================================================
+// MIDDLEWARE
+// ==========================================================
+
 app.use(cors());
 
 app.use(bodyParser.json({ limit: '8mb' }));
-app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // ==========================================================
 // API ROUTES
@@ -81,17 +88,23 @@ app.get('/api/live', authenticate, (req, res) => {
 
     // Heartbeat
     const heartbeat = setInterval(() => {
+
         try {
             res.write(': ping\n\n');
         } catch (e) {
             // Ignore errors
         }
+
     }, 25000);
 
     req.on('close', () => {
+
         clearInterval(heartbeat);
+
         events.removeClient(res);
+
     });
+
 });
 
 // ==========================================================
@@ -120,10 +133,37 @@ const allowedPages = [
 ];
 
 // ==========================================================
-// REDIRECT .HTML URL → CLEAN URL
-// Example:
-// /admin.html → /admin
-// /dashboard.html → /dashboard
+// REDIRECT index.html → ROOT
+//
+// /index.html
+//      ↓
+// /
+// ==========================================================
+
+app.get('/index.html', (req, res) => {
+
+    res.redirect(301, '/');
+
+});
+
+// ==========================================================
+// REDIRECT .html URLs → CLEAN URLs
+//
+// /admin.html
+//      ↓
+// /admin
+//
+// /dashboard.html
+//      ↓
+// /dashboard
+//
+// /face-punch.html
+//      ↓
+// /face-punch
+//
+// /forgot-password.html
+//      ↓
+// /forgot-password
 // ==========================================================
 
 app.get('/:page.html', (req, res, next) => {
@@ -139,10 +179,15 @@ app.get('/:page.html', (req, res, next) => {
 });
 
 // ==========================================================
-// CLEAN HTML URL
-// Example:
-// /admin → public/admin.html
-// /dashboard → public/dashboard.html
+// CLEAN URL → HTML FILE
+//
+// /admin
+//      ↓
+// public/admin.html
+//
+// /dashboard
+//      ↓
+// public/dashboard.html
 // ==========================================================
 
 app.get('/:page', (req, res, next) => {
@@ -173,14 +218,18 @@ app.get('/:page', (req, res, next) => {
 // SERVE STATIC FRONTEND FILES
 // ==========================================================
 
-app.use(express.static(
-    path.join(__dirname, 'public')
-));
+app.use(
+    express.static(
+        path.join(__dirname, 'public')
+    )
+);
 
 // ==========================================================
 // ROOT URL
-// https://your-domain.com/
-// → public/index.html
+//
+// /
+// ↓
+// public/index.html
 // ==========================================================
 
 app.get('/', (req, res) => {
@@ -202,8 +251,15 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
 
     console.log('==========================================================');
-    console.log('  MAXIM REALTY - Attendance Management System');
-    console.log(`  Server running at: http://localhost:${PORT}`);
+
+    console.log(
+        '  MAXIM REALTY - Attendance Management System'
+    );
+
+    console.log(
+        `  Server running at: http://localhost:${PORT}`
+    );
+
     console.log('==========================================================');
 
 });
