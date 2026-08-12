@@ -23,8 +23,15 @@ const payrollRoutes = require('./routes/payroll');
 const { authenticate } = require('./middleware/auth');
 const events = require('./utils/events');
 
-// Initialize database with default admin account on first run
+// ==========================================================
+// INITIALIZE DATABASE
+// ==========================================================
+
 seed();
+
+// ==========================================================
+// CREATE APP
+// ==========================================================
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,7 +42,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-app.use(bodyParser.json({ limit: '8mb' }));
+app.use(bodyParser.json({
+    limit: '8mb'
+}));
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -86,7 +95,6 @@ app.get('/api/live', authenticate, (req, res) => {
 
     events.addClient(res);
 
-    // Heartbeat
     const heartbeat = setInterval(() => {
 
         try {
@@ -136,7 +144,7 @@ const allowedPages = [
 // REDIRECT index.html → ROOT
 //
 // /index.html
-//      ↓
+//        ↓
 // /
 // ==========================================================
 
@@ -147,22 +155,22 @@ app.get('/index.html', (req, res) => {
 });
 
 // ==========================================================
-// REDIRECT .html URLs → CLEAN URLs
+// REDIRECT .html → CLEAN URL
 //
 // /admin.html
-//      ↓
+//        ↓
 // /admin
 //
 // /dashboard.html
-//      ↓
+//        ↓
 // /dashboard
 //
 // /face-punch.html
-//      ↓
+//        ↓
 // /face-punch
 //
 // /forgot-password.html
-//      ↓
+//        ↓
 // /forgot-password
 // ==========================================================
 
@@ -182,11 +190,11 @@ app.get('/:page.html', (req, res, next) => {
 // CLEAN URL → HTML FILE
 //
 // /admin
-//      ↓
+//        ↓
 // public/admin.html
 //
 // /dashboard
-//      ↓
+//        ↓
 // public/dashboard.html
 // ==========================================================
 
@@ -225,11 +233,7 @@ app.use(
 );
 
 // ==========================================================
-// ROOT URL
-//
-// /
-// ↓
-// public/index.html
+// ROOT URL → index.html
 // ==========================================================
 
 app.get('/', (req, res) => {
