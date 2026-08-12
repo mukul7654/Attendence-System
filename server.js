@@ -82,6 +82,40 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Maxim Realty Attendance System API is running', time: new Date().toISOString() });
 });
 
+// Extensionless HTML routes
+app.get('/:page', (req, res, next) => {
+    const page = req.params.page;
+
+    // Only allow HTML pages
+    const allowedPages = [
+        'admin',
+        'dashboard',
+        'face-punch',
+        'forgot-password'
+    ];
+
+    if (!allowedPages.includes(page)) {
+        return next();
+    }
+
+    res.sendFile(
+        path.join(__dirname, 'public', `${page}.html`),
+        (err) => {
+            if (err) {
+                next();
+            }
+        }
+    );
+});
+
+// Serve static frontend
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Fallback to index.html for root
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Serve static frontend
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -94,9 +128,6 @@ app.listen(PORT, () => {
   console.log('==========================================================');
   console.log('  MAXIM REALTY - Attendance Management System');
   console.log(`  Server running at: http://localhost:${PORT}`);
-  console.log('  Default Admin Login   -> username: admin  | password: admin123');
-  console.log('  Demo Manager Login    -> username: priya  | password: priya123 (Sales)');
-  console.log('  Demo Employee Login   -> username: rahul  | password: rahul123 (Sales, Mon off)');
-  console.log('  Demo Employee Login   -> username: ananya | password: ananya123 (Marketing, Sat+Sun off)');
+  
   console.log('==========================================================');
 });
