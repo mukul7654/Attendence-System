@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Maxim Realty | Attendance Login</title>
+ <link rel="icon" type="image/png" sizes="32x32" href="img/fab.png">
+<link rel="manifest" href="/manifest.json" />
+<meta name="theme-color" content="#0b1f3a" />
+<link rel="apple-touch-icon" href="/icons/icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+:root{
+
+--primary:#262626;
+--primary-dark:#151515;
+--primary-light:#3a3a3a;
+
+--gold:#e8b627;
+--gold-dark:#c9970d;
+--gold-light:#f7d86f;
+
+--cyan:#01c4cb;
+
+--white:#ffffff;
+--light:#f4f7fb;
+
+--text:#1c2434;
+--gray:#718096;
+
+--red:#dc4c64;
+--green:#27ae60;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+
+margin:0;
+padding:0;
+
+box-sizing:border-box;
+
+font-family:
+'Poppins',
+sans-serif;
+
+}
+
+
+html{
+
+width:100%;
+
+min-height:100%;
+
+}
+
+
+body{
+
+width:100%;
+
+min-height:100vh;
+
+min-height:100dvh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:30px;
+
+position:relative;
+
+overflow:hidden;
+
+background:var(--light);
+
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background{
+
+position:fixed;
+
+inset:0;
+
+background:
+
+linear-gradient(
+145deg,
+#202020 0%,
+#292929 50%,
+#171717 100%
+);
+
+clip-path:
+
+polygon(
+0 0,
+70% 0,
+45% 100%,
+0 100%
+);
+
+z-index:0;
+
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.background-grid{
+
+position:fixed;
+
+inset:0;
+
+z-index:1;
+
+opacity:.035;
+
+pointer-events:none;
+
+background-image:
+
+linear-gradient(
+rgba(255,255,255,1) 1px,
+transparent 1px
+),
+
+linear-gradient(
+90deg,
+rgba(255,255,255,1) 1px,
+transparent 1px
+);
+
+background-size:
+45px
+45px;
+
+}
+
+
+/* =========================================================
+   FLOATING CIRCLES
+========================================================= */
+
+.circle{
+
+position:fixed;
+
+border-radius:50%;
+
+pointer-events:none;
+
+z-index:2;
+
+}
+
+
+.circle-one{
+
+width:350px;
+
+height:350px;
+
+top:-120px;
+
+left:-100px;
+
+background:
+
+rgba(
+255,
+255,
+255,
+.055
+);
+
+}
+
+
+.circle-two{
+
+width:230px;
+
+height:230px;
+
+bottom:-80px;
+
+left:31%;
+
+background:
+
+rgba(
+232,
+182,
+39,
+.18
+);
+
+}
+
+
+.circle-three{
+
+width:130px;
+
+height:130px;
+
+top:14%;
+
+left:38%;
+
+background:
+
+rgba(
+255,
+255,
+255,
+.075
+);
+
+}
+
+
+.circle-four{
+
+width:90px;
+
+height:90px;
+
+bottom:16%;
+
+left:5%;
+
+border:
+
+1px solid
+rgba(
+232,
+182,
+39,
+.18
+);
+
+}
+
+
+/* =========================================================
+   LOGIN CONTAINER
+========================================================= */
+
+.login-container{
+
+width:100%;
+
+max-width:1120px;
+
+min-height:650px;
+
+display:grid;
+
+grid-template-columns:
+
+minmax(
+0,
+1.1fr
+)
+
+minmax(
+390px,
+.9fr
+);
+
+position:relative;
+
+z-index:10;
+
+}
+
+
+/* =========================================================
+   BRAND SECTION
+========================================================= */
+
+.brand-section{
+
+padding:
+
+60px
+55px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+color:var(--white);
+
+position:relative;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-box{
+
+width:215px;
+
+min-height:82px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+margin-bottom:42px;
+
+padding:
+
+15px
+24px;
+
+background:var(--white);
+
+border-radius:14px;
+
+box-shadow:
+
+0
+18px
+45px
+rgba(
+0,
+0,
+0,
+.25
+);
+
+transition:
+
+transform
+.3s
+ease,
+
+box-shadow
+.3s
+ease;
+
+}
+
+
+.logo-box:hover{
+
+transform:
+
+translateY(-4px);
+
+box-shadow:
+
+0
+25px
+55px
+rgba(
+0,
+0,
+0,
+.32
+);
+
+}
+
+
+.logo-box img{
+
+display:block;
+
+width:100%;
+
+max-height:60px;
+
+object-fit:contain;
+
+}
+
+
+/* =========================================================
+   BRAND CONTENT
+========================================================= */
+
+.brand-section h1{
+
+margin-bottom:22px;
+
+font-size:52px;
+
+font-weight:700;
+
+line-height:1.15;
+
+letter-spacing:-1.4px;
+
+}
+
+
+.brand-section h1 span{
+
+color:var(--gold);
+
+}
+
+
+.brand-section p{
+
+max-width:500px;
+
+font-size:16px;
+
+font-weight:300;
+
+line-height:30px;
+
+color:
+
+rgba(
+255,
+255,
+255,
+.78
+);
+
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.features{
+
+display:flex;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+gap:22px;
+
+margin-top:38px;
+
+}
+
+
+.feature{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+font-size:13px;
+
+font-weight:500;
+
+color:
+
+rgba(
+255,
+255,
+255,
+.88
+);
+
+}
+
+
+.feature-icon{
+
+width:40px;
+
+height:40px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+flex:0 0 40px;
+
+color:var(--gold);
+
+background:
+
+rgba(
+255,
+255,
+255,
+.09
+);
+
+border:
+
+1px solid
+rgba(
+255,
+255,
+255,
+.13
+);
+
+border-radius:11px;
+
+font-size:17px;
+
+box-shadow:
+
+inset
+0
+0
+0
+1px
+rgba(
+255,
+255,
+255,
+.025
+);
+
+}
+
+
+/* =========================================================
+   BRAND BOTTOM TEXT
+========================================================= */
+
+.brand-note{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+margin-top:35px;
+
+font-size:11px;
+
+color:
+
+rgba(
+255,
+255,
+255,
+.48
+);
+
+}
+
+
+.brand-note-dot{
+
+width:7px;
+
+height:7px;
+
+border-radius:50%;
+
+background:var(--green);
+
+box-shadow:
+
+0
+0
+0
+5px
+rgba(
+39,
+174,
+96,
+.1
+);
+
+}
+
+
+/* =========================================================
+   LOGIN AREA
+========================================================= */
+
+.login-area{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:30px;
+
+position:relative;
+
+}
+
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.login-card{
+
+width:100%;
+
+max-width:440px;
+
+padding:
+
+48px
+48px
+42px;
+
+position:relative;
+
+background:
+
+rgba(
+255,
+255,
+255,
+.98
+);
+
+border:
+
+1px solid
+rgba(
+255,
+255,
+255,
+.75
+);
+
+border-radius:25px;
+
+box-shadow:
+
+0
+30px
+80px
+rgba(
+7,
+27,
+53,
+.22
+);
+
+overflow:hidden;
+
+}
+
+
+/* =========================================================
+   TOP GOLD LINE
+========================================================= */
+
+.login-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:50%;
+
+transform:
+
+translateX(-50%);
+
+width:95px;
+
+height:5px;
+
+background:
+
+linear-gradient(
+90deg,
+var(--gold-dark),
+var(--gold),
+var(--gold-light)
+);
+
+border-radius:
+
+0
+0
+10px
+10px;
+
+}
+
+
+/* =========================================================
+   CARD DECORATION
+========================================================= */
+
+.login-card::after{
+
+content:"";
+
+position:absolute;
+
+width:160px;
+
+height:160px;
+
+top:-95px;
+
+right:-95px;
+
+border-radius:50%;
+
+background:
+
+rgba(
+232,
+182,
+39,
+.07
+);
+
+pointer-events:none;
+
+}
+
+
+/* =========================================================
+   LOGIN LABEL
+========================================================= */
+
+.portal-label{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:7px;
+
+margin-bottom:13px;
+
+padding:
+
+6px
+11px;
+
+color:#7b5c00;
+
+background:#fff8df;
+
+border:
+
+1px solid
+rgba(
+232,
+182,
+39,
+.25
+);
+
+border-radius:30px;
+
+font-size:10px;
+
+font-weight:600;
+
+letter-spacing:.6px;
+
+text-transform:uppercase;
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.login-card h2{
+
+margin-bottom:8px;
+
+color:var(--primary);
+
+font-size:31px;
+
+font-weight:700;
+
+line-height:1.25;
+
+letter-spacing:-.7px;
+
+}
+
+
+.login-card h2 span{
+
+display:inline-block;
+
+}
+
+
+.login-card .subtitle{
+
+margin-bottom:30px;
+
+color:var(--gray);
+
+font-size:13px;
+
+line-height:1.6;
+
+}
+
+
+/* =========================================================
+   ERROR BOX
+========================================================= */
+
+.error-box{
+
+display:none;
+
+width:100%;
+
+margin-bottom:18px;
+
+padding:
+
+12px
+14px;
+
+color:#b52f48;
+
+background:#fff1f3;
+
+border:
+
+1px solid
+rgba(
+220,
+76,
+100,
+.22
+);
+
+border-radius:11px;
+
+font-size:12px;
+
+font-weight:500;
+
+line-height:1.5;
+
+}
+
+
+.error-box:not(:empty){
+
+display:block;
+
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group{
+
+margin-bottom:20px;
+
+}
+
+
+.form-group label{
+
+display:flex;
+
+align-items:center;
+
+gap:7px;
+
+margin-bottom:9px;
+
+color:var(--text);
+
+font-size:11px;
+
+font-weight:600;
+
+letter-spacing:.7px;
+
+}
+
+
+/* =========================================================
+   INPUT BOX
+========================================================= */
+
+.input-box{
+
+position:relative;
+
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.input-box input{
+
+width:100%;
+
+height:54px;
+
+padding:
+
+0
+50px
+0
+18px;
+
+color:var(--text);
+
+background:#f9fbfd;
+
+border:
+
+1px solid
+#e1e7ef;
+
+border-radius:12px;
+
+outline:none;
+
+font-size:14px;
+
+font-weight:400;
+
+transition:
+
+border-color
+.25s
+ease,
+
+background
+.25s
+ease,
+
+box-shadow
+.25s
+ease;
+
+}
+
+
+.input-box input::placeholder{
+
+color:#a2adbc;
+
+}
+
+
+.input-box input:hover{
+
+border-color:#ccd5e1;
+
+}
+
+
+.input-box input:focus{
+
+border-color:var(--gold);
+
+background:var(--white);
+
+box-shadow:
+
+0
+0
+0
+4px
+rgba(
+232,
+182,
+39,
+.11
+);
+
+}
+
+
+/* =========================================================
+   INPUT ICON
+========================================================= */
+
+.input-icon{
+
+position:absolute;
+
+top:50%;
+
+right:17px;
+
+transform:
+
+translateY(-50%);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:#9aa5b5;
+
+font-size:17px;
+
+user-select:none;
+
+}
+
+
+/* =========================================================
+   PASSWORD EYE
+========================================================= */
+
+.password-eye{
+
+width:36px;
+
+height:36px;
+
+right:9px;
+
+border-radius:9px;
+
+cursor:pointer;
+
+transition:
+
+background
+.2s
+ease,
+
+transform
+.2s
+ease;
+
+}
+
+
+.password-eye:hover{
+
+background:#f0f3f7;
+
+transform:
+
+translateY(-50%)
+scale(1.05);
+
+}
+
+
+/* =========================================================
+   FORGOT PASSWORD
+========================================================= */
+
+.login-options{
+
+display:flex;
+
+align-items:center;
+
+justify-content:flex-end;
+
+margin-top:-4px;
+
+margin-bottom:20px;
+
+}
+
+
+.forgot-link{
+
+color:var(--primary);
+
+font-size:11px;
+
+font-weight:600;
+
+text-decoration:none;
+
+transition:
+
+color
+.2s
+ease;
+
+}
+
+
+.forgot-link:hover{
+
+color:var(--gold-dark);
+
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-btn{
+
+width:100%;
+
+height:55px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:9px;
+
+margin-top:5px;
+
+position:relative;
+
+overflow:hidden;
+
+color:var(--white);
+
+background:
+
+linear-gradient(
+135deg,
+#333333,
+#181818
+);
+
+border:0;
+
+border-radius:12px;
+
+font-size:14px;
+
+font-weight:600;
+
+cursor:pointer;
+
+box-shadow:
+
+0
+12px
+28px
+rgba(
+0,
+0,
+0,
+.22
+);
+
+transition:
+
+transform
+.25s
+ease,
+
+box-shadow
+.25s
+ease;
+
+}
+
+
+.login-btn::before{
+
+content:"";
+
+position:absolute;
+
+top:-80%;
+
+left:-60%;
+
+width:42%;
+
+height:260%;
+
+background:
+
+rgba(
+255,
+255,
+255,
+.17
+);
+
+transform:
+
+rotate(25deg);
+
+transition:
+
+left
+.55s
+ease;
+
+}
+
+
+.login-btn:hover{
+
+transform:
+
+translateY(-3px);
+
+box-shadow:
+
+0
+18px
+38px
+rgba(
+0,
+0,
+0,
+.3
+);
+
+}
+
+
+.login-btn:hover::before{
+
+left:130%;
+
+}
+
+
+.login-btn:active{
+
+transform:
+
+translateY(0)
+scale(.99);
+
+}
+
+
+.login-btn:disabled{
+
+opacity:.65;
+
+cursor:not-allowed;
+
+transform:none;
+
+}
+
+
+/* =========================================================
+   SECURE LOGIN
+========================================================= */
+
+.secure-login{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:7px;
+
+margin-top:22px;
+
+color:#8a94a6;
+
+font-size:11px;
+
+}
+
+
+.secure-icon{
+
+color:var(--green);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+margin-top:27px;
+
+padding-top:20px;
+
+text-align:center;
+
+color:#9aa5b5;
+
+border-top:
+
+1px solid
+#edf0f4;
+
+font-size:10px;
+
+line-height:19px;
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(
+max-width:950px
+){
+
+body{
+
+align-items:flex-start;
+
+overflow-y:auto;
+
+padding:
+
+25px
+20px;
+
+background:
+
+linear-gradient(
+155deg,
+#202020,
+#111111
+);
+
+}
+
+
+.background{
+
+clip-path:none;
+
+background:
+
+linear-gradient(
+155deg,
+#292929,
+#141414
+);
+
+}
+
+
+.login-container{
+
+max-width:650px;
+
+min-height:auto;
+
+grid-template-columns:1fr;
+
+}
+
+
+.brand-section{
+
+padding:
+
+35px
+30px
+20px;
+
+text-align:center;
+
+align-items:center;
+
+}
+
+
+.logo-box{
+
+width:185px;
+
+margin-bottom:25px;
+
+}
+
+
+.brand-section h1{
+
+font-size:38px;
+
+}
+
+
+.brand-section p{
+
+max-width:540px;
+
+font-size:14px;
+
+line-height:25px;
+
+}
+
+
+.features{
+
+justify-content:center;
+
+margin-top:25px;
+
+}
+
+
+.brand-note{
+
+margin-top:25px;
+
+}
+
+
+.login-area{
+
+padding:
+
+25px
+30px
+40px;
+
+}
+
+
+.login-card{
+
+max-width:500px;
+
+}
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(
+max-width:600px
+){
+
+body{
+
+padding:0;
+
+background:var(--primary);
+
+}
+
+
+.background{
+
+background:
+
+linear-gradient(
+160deg,
+#292929,
+#151515
+);
+
+}
+
+
+.background-grid{
+
+background-size:
+
+35px
+35px;
+
+}
+
+
+.circle-one{
+
+width:220px;
+
+height:220px;
+
+}
+
+
+.circle-two{
+
+width:150px;
+
+height:150px;
+
+left:auto;
+
+right:-60px;
+
+bottom:25%;
+
+}
+
+
+.circle-three{
+
+width:90px;
+
+height:90px;
+
+top:8%;
+
+left:75%;
+
+}
+
+
+.circle-four{
+
+display:none;
+
+}
+
+
+.login-container{
+
+width:100%;
+
+max-width:none;
+
+min-height:100vh;
+
+min-height:100dvh;
+
+}
+
+
+.brand-section{
+
+padding:
+
+30px
+20px
+26px;
+
+}
+
+
+.logo-box{
+
+width:158px;
+
+min-height:62px;
+
+margin-bottom:21px;
+
+padding:
+
+11px
+19px;
+
+border-radius:11px;
+
+}
+
+
+.logo-box img{
+
+max-height:45px;
+
+}
+
+
+.brand-section h1{
+
+margin-bottom:12px;
+
+font-size:29px;
+
+letter-spacing:-.7px;
+
+}
+
+
+.brand-section p{
+
+max-width:330px;
+
+font-size:12px;
+
+line-height:21px;
+
+}
+
+
+.features{
+
+display:none;
+
+}
+
+
+.brand-note{
+
+display:none;
+
+}
+
+
+.login-area{
+
+padding:
+
+10px
+15px
+max(
+25px,
+env(
+safe-area-inset-bottom
+)
+);
+
+}
+
+
+.login-card{
+
+max-width:none;
+
+padding:
+
+35px
+25px
+30px;
+
+border-radius:
+
+23px
+23px
+18px
+18px;
+
+}
+
+
+.portal-label{
+
+font-size:9px;
+
+}
+
+
+.login-card h2{
+
+font-size:27px;
+
+}
+
+
+.login-card .subtitle{
+
+margin-bottom:25px;
+
+font-size:12px;
+
+}
+
+
+.form-group{
+
+margin-bottom:17px;
+
+}
+
+
+.input-box input{
+
+height:52px;
+
+font-size:16px;
+
+}
+
+
+.login-btn{
+
+height:52px;
+
+}
+
+
+.footer{
+
+margin-top:23px;
+
+}
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(
+max-width:360px
+){
+
+.brand-section{
+
+padding:
+
+25px
+15px
+20px;
+
+}
+
+
+.logo-box{
+
+width:145px;
+
+}
+
+
+.brand-section h1{
+
+font-size:25px;
+
+}
+
+
+.brand-section p{
+
+font-size:11px;
+
+line-height:19px;
+
+}
+
+
+.login-area{
+
+padding:
+
+8px
+10px
+20px;
+
+}
+
+
+.login-card{
+
+padding:
+
+30px
+20px
+25px;
+
+}
+
+
+.login-card h2{
+
+font-size:24px;
+
+}
+
+
+.input-box input{
+
+height:50px;
+
+}
+
+
+.login-btn{
+
+height:50px;
+
+}
+
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media(
+min-width:1500px
+){
+
+.login-container{
+
+max-width:1200px;
+
+min-height:700px;
+
+}
+
+
+.brand-section{
+
+padding:
+
+70px
+65px;
+
+}
+
+
+.brand-section h1{
+
+font-size:57px;
+
+}
+
+
+.login-card{
+
+max-width:460px;
+
+padding:
+
+55px
+52px
+45px;
+
+}
+
+}
+
+
+/* =========================================================
+   TOUCH DEVICE
+========================================================= */
+
+@media(
+hover:none
+){
+
+.logo-box:hover,
+.login-btn:hover{
+
+transform:none;
+
+}
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(
+prefers-reduced-motion:reduce
+){
+
+*{
+
+transition:none !important;
+
+}
+
+}
+
+</style>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+</script>
+</head>
+
+<body>
+
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
+
+<div class="background"></div>
+
+<div class="background-grid"></div>
+
+<div class="circle circle-one"></div>
+
+<div class="circle circle-two"></div>
+
+<div class="circle circle-three"></div>
+
+<div class="circle circle-four"></div>
+
+<!-- =========================================================
+     LOGIN CONTAINER
+========================================================= -->
+
+<main class="login-container">
+
+<!-- =========================================================
+     MAXIM REALTY BRAND SECTION
+========================================================= -->
+
+<section class="brand-section">
+
+<div class="logo-box">
+
+<img
+src="img/logo.webp"
+alt="Maxim Realty Logo">
+
+</div>
+
+<h1>
+
+Smart Attendance.
+
+<br>
+
+<span>
+
+Simple & Smarter.
+
+</span>
+
+</h1>
+
+<p>
+
+A secure employee attendance management portal
+designed to simplify daily check-ins, attendance
+tracking and workforce management.
+
+</p>
+
+<div class="features">
+
+<div class="feature">
+
+<div class="feature-icon">
+
+✓
+
+</div>
+
+<span>
+
+Secure Login
+
+</span>
+
+</div>
+
+<div class="feature">
+
+<div class="feature-icon">
+
+◷
+
+</div>
+
+<span>
+
+Attendance Tracking
+
+</span>
+
+</div>
+
+<div class="feature">
+
+<div class="feature-icon">
+
+⌁
+
+</div>
+
+<span>
+
+Smart Workforce
+
+</span>
+
+</div>
+
+</div>
+
+<div class="brand-note">
+
+<span class="brand-note-dot"></span>
+
+Maxim Realty Employee Attendance Portal
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     LOGIN AREA
+========================================================= -->
+
+<section class="login-area">
+
+<div class="login-card">
+
+<div class="portal-label">
+
+<span>
+
+●
+
+</span>
+
+Employee Portal
+
+</div>
+
+<h2>
+
+Welcome Back
+
+<span>
+
+👋
+
+</span>
+
+</h2>
+
+<p class="subtitle">
+
+Sign in to your employee account
+to continue to the dashboard.
+
+</p>
+
+<!-- =========================================================
+     EXISTING ERROR BOX
+========================================================= -->
+
+<div
+class="error-box"
+id="errorBox">
+
+</div>
+
+<!-- =========================================================
+     EXISTING LOGIN FORM
+========================================================= -->
+
+<form id="loginForm">
+
+<div class="form-group">
+
+<label for="username">
+
+USERNAME
+
+</label>
+
+<div class="input-box">
+
+<input
+type="text"
+id="username"
+placeholder="Enter your username"
+autocomplete="username"
+required>
+
+<span class="input-icon">
+
+👤
+
+</span>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="password">
+
+PASSWORD
+
+</label>
+
+<div class="input-box">
+
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+autocomplete="current-password"
+required>
+
+<span
+class="input-icon password-eye"
+id="passwordToggle"
+role="button"
+tabindex="0"
+aria-label="Show Password">
+
+👁
+
+</span>
+
+</div>
+
+</div>
+
+<div class="login-options">
+
+<a
+href="/forgot-password.html"
+class="forgot-link">
+
+Forgot password?
+
+</a>
+
+</div>
+
+<button
+type="submit"
+class="login-btn"
+id="loginBtn">
+
+<span>
+
+Login to Dashboard
+
+</span>
+
+<span>
+
+→
+
+</span>
+
+</button>
+
+</form>
+<!-- 
+<div style="text-align:center; margin-top:18px;">
+
+<a href="/face-punch.html" style="display:inline-flex; align-items:center; gap:6px; color:#7b5c00; background:#fff8df; border:1px solid rgba(232,182,39,.35); border-radius:30px; padding:8px 16px; font-size:12.5px; font-weight:600; text-decoration:none;">
+
+🙂 Face Punch — Attendance without a password
+
+</a>
+
+</div> -->
+
+<div class="secure-login">
+
+<span class="secure-icon">
+
+🔒
+
+</span>
+
+Secure Employee Login Portal
+
+</div>
+
+<div class="footer">
+
+© 2026 Maxim Realty Advisors Pvt. Ltd.
+
+<br>
+
+Employee Attendance Management System
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- =========================================================
+     PASSWORD SHOW / HIDE
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+
+const passwordInput =
+
+document.getElementById(
+"password"
+);
+
+
+const passwordToggle =
+
+document.getElementById(
+"passwordToggle"
+);
+
+
+if(
+passwordInput &&
+passwordToggle
+){
+
+
+function togglePassword(){
+
+
+const isPassword =
+
+passwordInput.type ===
+"password";
+
+
+passwordInput.type =
+
+isPassword
+?
+"text"
+:
+"password";
+
+
+passwordToggle.innerHTML =
+
+isPassword
+?
+"🙈"
+:
+"👁";
+
+
+passwordToggle.setAttribute(
+
+"aria-label",
+
+isPassword
+?
+"Hide Password"
+:
+"Show Password"
+
+);
+
+
+}
+
+
+passwordToggle.addEventListener(
+
+"click",
+
+togglePassword
+
+);
+
+
+passwordToggle.addEventListener(
+
+"keydown",
+
+function(event){
+
+
+if(
+event.key === "Enter" ||
+event.key === " "
+){
+
+
+event.preventDefault();
+
+
+togglePassword();
+
+
+}
+
+
+}
+
+);
+
+
+}
+
+
+}
+
+);
+
+</script>
+
+<!-- =========================================================
+     EXISTING FUNCTION FILES
+     DO NOT DELETE
+========================================================= -->
+
+<script src="js/api.js"></script>
+
+<script src="js/login.js"></script>
+
+</body>
+
+</html>

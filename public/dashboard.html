@@ -1,0 +1,3678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, viewport-fit=cover" />
+<title>Dashboard | Maxim Realty Attendance</title>
+<link rel="manifest" href="/manifest.json" />
+<meta name="theme-color" content="#0b1f3a" />
+<link rel="apple-touch-icon" href="/icons/icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+ <link rel="icon" type="image/png" sizes="32x32" href="img/fab.png">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+
+            --primary: #102c4e;
+
+            --primary-dark: #081d35;
+
+            --primary-light: #1c466f;
+
+            --gold: #c9a227;
+
+            --gold-dark: #a9810e;
+
+            --gold-light: #f6e7a8;
+
+            --gold-soft: #fff9e7;
+
+            --green: #16a36a;
+
+            --green-soft: #eafaf3;
+
+            --orange: #f08b24;
+
+            --orange-soft: #fff4e8;
+
+            --blue: #2878d0;
+
+            --blue-soft: #eaf4ff;
+
+            --red: #dc4c64;
+
+            --red-soft: #fff0f3;
+
+            --purple: #7657d6;
+
+            --purple-soft: #f2efff;
+
+            --body-bg: #f4f7fb;
+
+            --card-bg: #ffffff;
+
+            --text: #172033;
+
+            --text-light: #667085;
+
+            --border: #e4e9f1;
+
+            --sidebar-width: 270px;
+
+            --topbar-height: 82px;
+
+            --radius: 16px;
+
+            --radius-sm: 10px;
+
+            --shadow:
+                0 8px 30px rgba(16, 44, 78, 0.08);
+
+            --shadow-hover:
+                0 14px 38px rgba(16, 44, 78, 0.14);
+
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: "Inter", sans-serif;
+
+            background: var(--body-bg);
+
+            color: var(--text);
+
+            overflow-x: hidden;
+
+            -webkit-font-smoothing: antialiased;
+
+        }
+
+
+        button,
+        input,
+        select {
+
+            font: inherit;
+
+        }
+
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+
+        a {
+
+            text-decoration: none;
+
+        }
+
+
+        img {
+
+            max-width: 100%;
+
+            display: block;
+
+        }
+
+
+        /* =========================================================
+           APP
+        ========================================================= */
+
+        .app-shell {
+
+            min-height: 100vh;
+
+            width: 100%;
+
+        }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            bottom: 0;
+
+            width: var(--sidebar-width);
+
+            height: 100vh;
+
+            z-index: 1100;
+
+            display: flex;
+
+            flex-direction: column;
+
+            background:
+
+                radial-gradient(
+                    circle at top right,
+                    rgba(201, 162, 39, 0.22),
+                    transparent 32%
+                ),
+
+                linear-gradient(
+                    160deg,
+                    #153b64 0%,
+                    #102c4e 45%,
+                    #071b31 100%
+                );
+
+            color: #ffffff;
+
+            box-shadow:
+                10px 0 35px rgba(5, 24, 44, 0.14);
+
+            transition:
+                transform 0.35s ease,
+                width 0.35s ease;
+
+            overflow: hidden;
+
+        }
+
+
+        .sidebar::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+
+            height: 180px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.05);
+
+            bottom: 40px;
+
+            right: -90px;
+
+            pointer-events: none;
+
+        }
+
+
+        /* =========================================================
+           BRAND
+        ========================================================= */
+
+        .brand {
+
+            position: relative;
+
+            z-index: 2;
+
+            min-height: 95px;
+
+            padding: 20px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.1);
+
+        }
+
+
+        .brand-logo {
+
+            width: 54px;
+
+            height: 54px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: #ffffff;
+
+            padding: 5px;
+
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.18);
+
+        }
+
+
+        .brand-logo img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+        }
+
+
+        .brand .name {
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            line-height: 1.25;
+
+            color: #ffffff;
+
+            white-space: nowrap;
+
+        }
+
+
+        .brand .name small {
+
+            display: block;
+
+            margin-top: 4px;
+
+            font-family: "Inter", sans-serif;
+
+            font-size: 10px;
+
+            font-weight: 500;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+
+            color: var(--gold-light);
+
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .nav-links {
+
+            position: relative;
+
+            z-index: 2;
+
+            flex: 1;
+
+            padding: 20px 14px;
+
+            overflow-y: auto;
+
+        }
+
+
+        .nav-links::-webkit-scrollbar {
+
+            width: 4px;
+
+        }
+
+
+        .nav-links::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(255, 255, 255, 0.18);
+
+            border-radius: 10px;
+
+        }
+
+
+        .nav-item {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            display: flex;
+
+            align-items: center;
+
+            margin-bottom: 8px;
+
+            padding: 10px 13px;
+
+            border-radius: 12px;
+
+            color: rgba(255, 255, 255, 0.78);
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            position: relative;
+
+            transition: 0.3s ease;
+
+        }
+
+
+        .nav-item::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 50%;
+
+            width: 4px;
+
+            height: 0;
+
+            border-radius: 0 5px 5px 0;
+
+            background: var(--gold);
+
+            transform: translateY(-50%);
+
+            transition: 0.3s ease;
+
+        }
+
+
+        .nav-item .icon {
+
+            width: 36px;
+
+            height: 36px;
+
+            display: inline-flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            margin-right: 11px;
+
+            border-radius: 10px;
+
+            font-size: 18px;
+
+            color: var(--gold-light);
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            transition: 0.3s ease;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .nav-item:hover {
+
+            color: #ffffff;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            transform: translateX(3px);
+
+        }
+
+
+        .nav-item:hover .icon {
+
+            background:
+                rgba(201, 162, 39, 0.18);
+
+            color: #ffffff;
+
+        }
+
+
+        .nav-item.active {
+
+            color: #ffffff;
+
+            font-weight: 600;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(201, 162, 39, 0.28),
+                    rgba(255, 255, 255, 0.08)
+                );
+
+            box-shadow:
+                inset 0 0 0 1px
+                rgba(255, 255, 255, 0.05);
+
+        }
+
+
+        .nav-item.active::before {
+
+            height: 30px;
+
+        }
+
+
+        .nav-item.active .icon {
+
+            color: #ffffff;
+
+            background: var(--gold);
+
+            box-shadow:
+                0 7px 18px rgba(201, 162, 39, 0.3);
+
+        }
+
+
+        /* =========================================================
+           SIDEBAR USER
+        ========================================================= */
+
+        .footer-user {
+
+            position: relative;
+
+            z-index: 2;
+
+            padding: 17px;
+
+            margin: 12px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.1);
+
+            backdrop-filter: blur(10px);
+
+        }
+
+
+        .avatar-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+        }
+
+
+        .avatar-circle {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            color: var(--primary-dark);
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff7d6,
+                    var(--gold)
+                );
+
+            border:
+                2px solid rgba(255, 255, 255, 0.4);
+
+        }
+
+
+        .who {
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            max-width: 145px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .role {
+
+            margin-top: 3px;
+
+            color:
+                rgba(255, 255, 255, 0.62);
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================================
+           MAIN CONTENT
+        ========================================================= */
+
+        .main-content {
+
+            width:
+                calc(100% - var(--sidebar-width));
+
+            min-height: 100vh;
+
+            margin-left: var(--sidebar-width);
+
+            transition:
+                margin-left 0.35s ease,
+                width 0.35s ease;
+
+        }
+
+
+        /* =========================================================
+           TOPBAR
+        ========================================================= */
+
+        .topbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 900;
+
+            min-height: var(--topbar-height);
+
+            padding: 14px 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            background:
+                rgba(255, 255, 255, 0.92);
+
+            backdrop-filter: blur(16px);
+
+            border-bottom:
+                1px solid var(--border);
+
+            box-shadow:
+                0 4px 18px rgba(16, 44, 78, 0.04);
+
+        }
+
+
+        .topbar-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            min-width: 0;
+
+        }
+
+
+        .topbar-title {
+
+            min-width: 0;
+
+        }
+
+
+        .topbar h2 {
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: clamp(18px, 2vw, 24px);
+
+            color: var(--primary);
+
+            font-weight: 700;
+
+            line-height: 1.25;
+
+        }
+
+
+        .topbar .sub {
+
+            margin-top: 3px;
+
+            color: var(--text-light);
+
+            font-size: 12.5px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .live-clock {
+
+            min-width: 122px;
+
+            padding: 10px 14px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            color: var(--primary);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gold-soft),
+                    #ffffff
+                );
+
+            border:
+                1px solid rgba(201, 162, 39, 0.28);
+
+            box-shadow:
+                0 6px 18px rgba(201, 162, 39, 0.1);
+
+        }
+
+
+        .live-clock::before {
+
+            content: "\F293";
+
+            font-family: "bootstrap-icons";
+
+            margin-right: 7px;
+
+            color: var(--gold-dark);
+
+        }
+
+
+        .hamburger {
+
+            display: none;
+
+            width: 43px;
+
+            height: 43px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-light)
+                );
+
+            font-size: 21px;
+
+            box-shadow:
+                0 7px 18px rgba(16, 44, 78, 0.2);
+
+        }
+
+
+        /* =========================================================
+           CONTENT
+        ========================================================= */
+
+        .content {
+
+            width: 100%;
+
+            padding: 26px 28px 40px;
+
+        }
+
+
+        /* =========================================================
+           GRID
+        ========================================================= */
+
+        .grid {
+
+            display: grid;
+
+            gap: 20px;
+
+        }
+
+
+        .grid-2 {
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+        }
+
+
+        .grid-3 {
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+        }
+
+
+        #topGrid {
+
+            grid-template-columns:
+                minmax(320px, 1.05fr)
+                minmax(0, 1.95fr) !important;
+
+        }
+
+
+        #profileGrid {
+
+            grid-template-columns:
+                minmax(300px, 1fr)
+                minmax(0, 1.4fr) !important;
+
+        }
+
+
+        /* =========================================================
+           CARD
+        ========================================================= */
+
+        .card {
+
+            width: 100%;
+
+            padding: 22px;
+
+            border-radius: var(--radius);
+
+            background: var(--card-bg);
+
+            border:
+                1px solid rgba(228, 233, 241, 0.9);
+
+            box-shadow: var(--shadow);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+        }
+
+
+        .card:hover {
+
+            box-shadow: var(--shadow-hover);
+
+        }
+
+
+        .card h3 {
+
+            margin-bottom: 18px;
+
+            color: var(--primary);
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =========================================================
+           PUNCH CARD
+        ========================================================= */
+
+        .punch-card {
+
+            min-height: 100%;
+
+            padding: 26px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            color: #ffffff;
+
+            background:
+
+                radial-gradient(
+                    circle at 100% 0,
+                    rgba(201, 162, 39, 0.35),
+                    transparent 37%
+                ),
+
+                linear-gradient(
+                    145deg,
+                    #173f69 0%,
+                    #102c4e 50%,
+                    #071c32 100%
+                );
+
+            box-shadow:
+                0 16px 38px rgba(16, 44, 78, 0.24);
+
+        }
+
+
+        .punch-card::before {
+
+            content: "\F293";
+
+            font-family: "bootstrap-icons";
+
+            position: absolute;
+
+            right: -15px;
+
+            bottom: -45px;
+
+            font-size: 180px;
+
+            color:
+                rgba(255, 255, 255, 0.035);
+
+            transform: rotate(-15deg);
+
+        }
+
+
+        .clock {
+
+            position: relative;
+
+            z-index: 2;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size:
+                clamp(32px, 4vw, 40px);
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            line-height: 1.2;
+
+        }
+
+
+        .date-line {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin-top: 6px;
+
+            color:
+                rgba(255, 255, 255, 0.7);
+
+            font-size: 13px;
+
+        }
+
+
+        .punch-status-row {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 10px;
+
+            margin-top: 5px !important;
+
+        }
+
+
+        .punch-status-item {
+
+            padding: 13px 10px;
+
+            text-align: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.1);
+
+        }
+
+
+        .punch-status-item .lbl {
+
+            margin-bottom: 7px;
+
+            color:
+                rgba(255, 255, 255, 0.62);
+
+            font-size: 9px !important;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.6px;
+
+        }
+
+
+        .punch-status-item .val {
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .punch-actions {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 11px;
+
+            margin-top: 22px;
+
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .btn {
+
+            min-height: 42px;
+
+            padding: 10px 17px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            border: 1px solid transparent;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            transition: 0.25s ease;
+
+        }
+
+
+        .btn:hover {
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .btn:active {
+
+            transform: translateY(0);
+
+        }
+
+
+        .btn-primary {
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-light)
+                );
+
+            box-shadow:
+                0 7px 18px rgba(16, 44, 78, 0.2);
+
+        }
+
+
+        .btn-primary:hover {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary-dark),
+                    var(--primary)
+                );
+
+        }
+
+
+        .btn-gold {
+
+            color: var(--primary-dark);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f3d66b,
+                    var(--gold)
+                );
+
+            box-shadow:
+                0 7px 18px rgba(201, 162, 39, 0.22);
+
+        }
+
+
+        .btn-gold:hover {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffe58a,
+                    #d4aa28
+                );
+
+        }
+
+
+        .btn-outline {
+
+            color: var(--primary);
+
+            background: transparent;
+
+            border-color: var(--border);
+
+        }
+
+
+        .btn-outline:hover {
+
+            color: var(--primary);
+
+            border-color: var(--gold);
+
+            background: var(--gold-soft);
+
+        }
+
+
+        .btn-sm {
+
+            min-height: 36px;
+
+            padding: 8px 13px;
+
+            font-size: 12px;
+
+        }
+
+
+        .btn-block {
+
+            width: 100%;
+
+        }
+
+
+        /* =========================================================
+           STATS
+        ========================================================= */
+
+        .stat-card {
+
+            min-height: 116px;
+
+            padding: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffffff,
+                    #f9fbfd
+                );
+
+            border:
+                1px solid var(--border);
+
+            transition: 0.3s ease;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform: translateY(-4px);
+
+            border-color:
+                rgba(201, 162, 39, 0.35);
+
+            box-shadow:
+                0 10px 25px rgba(16, 44, 78, 0.09);
+
+        }
+
+
+        .stat-card .icon {
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            font-size: 21px;
+
+        }
+
+
+        .icon-green {
+
+            color: var(--green);
+
+            background: var(--green-soft);
+
+        }
+
+
+        .icon-orange {
+
+            color: var(--orange);
+
+            background: var(--orange-soft);
+
+        }
+
+
+        .icon-blue {
+
+            color: var(--blue);
+
+            background: var(--blue-soft);
+
+        }
+
+
+        .stat-card .value {
+
+            color: var(--primary);
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+        }
+
+
+        .stat-card .label {
+
+            margin-top: 3px;
+
+            color: var(--text-light);
+
+            font-size: 11.5px;
+
+        }
+
+
+        /* =========================================================
+           SECTION HEADER
+        ========================================================= */
+
+        .section-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .section-header h2 {
+
+            color: var(--primary);
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+        }
+
+
+        .text-muted {
+
+            color: var(--text-light);
+
+        }
+
+
+        /* =========================================================
+           LEAVE BALANCE
+        ========================================================= */
+
+        .leave-balance-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+
+        }
+
+
+        .leave-balance-item {
+
+            min-height: 100px;
+
+            padding: 18px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--gold-soft),
+                    #ffffff
+                );
+
+            border:
+                1px solid rgba(201, 162, 39, 0.2);
+
+            transition: 0.3s ease;
+
+        }
+
+
+        .leave-balance-item:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 24px rgba(201, 162, 39, 0.12);
+
+        }
+
+
+        .lb-num {
+
+            color: var(--primary);
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+        }
+
+
+        .lb-label {
+
+            margin-top: 5px;
+
+            color: var(--text-light);
+
+            font-size: 11.5px;
+
+            font-weight: 500;
+
+        }
+
+
+        /* =========================================================
+           FILTER
+        ========================================================= */
+
+        .filters-bar {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+
+            padding: 15px;
+
+            border-radius: 13px;
+
+            background: #f8fafc;
+
+            border:
+                1px solid var(--border);
+
+        }
+
+
+        .field {
+
+            min-width: 0;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .filters-bar .field {
+
+            min-width: 130px;
+
+            margin-bottom: 0;
+
+        }
+
+
+        .field label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #475467;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .field input,
+        .field select {
+
+            width: 100%;
+
+            min-height: 43px;
+
+            padding: 10px 12px;
+
+            border-radius: 9px;
+
+            border:
+                1px solid var(--border);
+
+            outline: none;
+
+            color: var(--text);
+
+            background: #ffffff;
+
+            font-size: 13px;
+
+            transition: 0.25s ease;
+
+        }
+
+
+        .field input:focus,
+        .field select:focus {
+
+            border-color: var(--gold);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(201, 162, 39, 0.12);
+
+        }
+
+
+        .filter-sep {
+
+            padding-bottom: 11px;
+
+            color: var(--text-light);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =========================================================
+           TABLE
+        ========================================================= */
+
+        .table-wrap {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            border-radius: 12px;
+
+            border:
+                1px solid var(--border);
+
+        }
+
+
+        .table-wrap::-webkit-scrollbar {
+
+            height: 6px;
+
+        }
+
+
+        .table-wrap::-webkit-scrollbar-thumb {
+
+            background: #c9d2df;
+
+            border-radius: 10px;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            min-width: 650px;
+
+            border-collapse: collapse;
+
+            background: #ffffff;
+
+        }
+
+
+        thead {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #f7f9fc,
+                    #fbfcfe
+                );
+
+        }
+
+
+        th {
+
+            padding: 14px 15px;
+
+            text-align: left;
+
+            color: var(--primary);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.45px;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        td {
+
+            padding: 14px 15px;
+
+            color: #475467;
+
+            font-size: 12.5px;
+
+            border-bottom:
+                1px solid #edf0f5;
+
+        }
+
+
+        tbody tr {
+
+            transition: 0.2s ease;
+
+        }
+
+
+        tbody tr:hover {
+
+            background: var(--gold-soft);
+
+        }
+
+
+        tbody tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        .empty-row td {
+
+            padding: 30px;
+
+            text-align: center;
+
+            color: var(--text-light);
+
+        }
+
+
+        /* =========================================================
+           BADGE
+        ========================================================= */
+
+        .badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        .badge-active {
+
+            color: var(--green);
+
+            background: var(--green-soft);
+
+        }
+
+
+        /* =========================================================
+           PROFILE
+        ========================================================= */
+
+        .avatar-circle-lg {
+
+            width: 95px;
+
+            height: 95px;
+
+            margin: 0 auto;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #ffffff;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    var(--primary-light),
+                    var(--primary-dark)
+                );
+
+            border:
+                5px solid var(--gold-soft);
+
+            box-shadow:
+                0 10px 30px rgba(16, 44, 78, 0.2);
+
+        }
+
+
+        .profile-info-list {
+
+            margin-top: 24px;
+
+            border-top:
+                1px solid var(--border);
+
+        }
+
+
+        .profile-info-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding: 13px 3px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            font-size: 12px;
+
+        }
+
+
+        .profile-info-row span {
+
+            color: var(--text-light);
+
+        }
+
+
+        .profile-info-row b {
+
+            color: var(--primary);
+
+            text-align: right;
+
+        }
+
+
+        .divider {
+
+            height: 1px;
+
+            margin: 25px 0;
+
+            border: none;
+
+            background: var(--border);
+
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal-backdrop {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 2000;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(5, 19, 34, 0.66);
+
+            backdrop-filter: blur(5px);
+
+        }
+
+
+        .modal-backdrop.show {
+
+            display: flex;
+
+        }
+
+
+        .modal {
+
+            width: 100%;
+
+            max-width: 620px;
+
+            max-height: calc(100vh - 40px);
+
+            overflow-y: auto;
+
+            padding: 26px;
+
+            border-radius: 18px;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.28);
+
+            animation:
+                modalOpen 0.3s ease;
+
+        }
+
+
+        @keyframes modalOpen {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px) scale(0.97);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0) scale(1);
+
+            }
+
+        }
+
+
+        .modal h3 {
+
+            margin-bottom: 22px;
+
+            color: var(--primary);
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 20px;
+
+        }
+
+
+        .modal-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 10px;
+
+        }
+
+
+        /* =========================================================
+           OVERLAY
+        ========================================================= */
+
+        .overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 1050;
+
+            display: none;
+
+            background:
+                rgba(4, 17, 31, 0.65);
+
+            backdrop-filter: blur(3px);
+
+        }
+
+
+        .overlay.active {
+
+            display: block;
+
+        }
+
+
+        /* =========================================================
+           LARGE LAPTOP
+        ========================================================= */
+
+        @media (max-width: 1250px) {
+
+            :root {
+
+                --sidebar-width: 245px;
+
+            }
+
+
+            .content {
+
+                padding:
+                    22px 22px 35px;
+
+            }
+
+
+            .topbar {
+
+                padding:
+                    14px 22px;
+
+            }
+
+
+            #topGrid {
+
+                grid-template-columns:
+                    1fr 1.6fr !important;
+
+            }
+
+
+            .grid-3 {
+
+                gap: 12px;
+
+            }
+
+
+            .stat-card {
+
+                padding: 14px;
+
+            }
+
+
+            .stat-card .icon {
+
+                width: 43px;
+
+                height: 43px;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           TABLET LANDSCAPE
+        ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+            }
+
+
+            .sidebar.active {
+
+                transform:
+                    translateX(0);
+
+            }
+
+
+            .main-content {
+
+                width: 100%;
+
+                margin-left: 0;
+
+            }
+
+
+            .hamburger {
+
+                display: inline-flex;
+
+            }
+
+
+            #topGrid {
+
+                grid-template-columns:
+                    1fr !important;
+
+            }
+
+
+            #profileGrid {
+
+                grid-template-columns:
+                    1fr 1.3fr !important;
+
+            }
+
+
+            .leave-balance-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 768px) {
+
+            :root {
+
+                --topbar-height: 72px;
+
+            }
+
+
+            .topbar {
+
+                padding:
+                    11px 15px;
+
+            }
+
+
+            .content {
+
+                padding:
+                    18px 15px 30px;
+
+            }
+
+
+            .topbar h2 {
+
+                font-size: 18px;
+
+            }
+
+
+            .topbar .sub {
+
+                max-width: 260px;
+
+            }
+
+
+            .live-clock {
+
+                min-width: 105px;
+
+                padding: 9px 10px;
+
+                font-size: 13px;
+
+            }
+
+
+            .card {
+
+                padding: 18px;
+
+            }
+
+
+            .punch-card {
+
+                padding: 22px;
+
+            }
+
+
+            .grid-2,
+            .grid-3 {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+
+            #profileGrid {
+
+                grid-template-columns:
+                    1fr !important;
+
+            }
+
+
+            .filters-bar {
+
+                align-items: stretch;
+
+            }
+
+
+            .filters-bar .field {
+
+                width:
+                    calc(50% - 6px);
+
+                min-width: 0;
+
+            }
+
+
+            .filter-sep {
+
+                display: none;
+
+            }
+
+
+            .filters-bar .btn {
+
+                flex: 1;
+
+            }
+
+
+            .section-header {
+
+                align-items: flex-start;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 575px) {
+
+            .sidebar {
+
+                width: min(85vw, 300px);
+
+            }
+
+
+            .brand {
+
+                min-height: 85px;
+
+                padding: 16px 18px;
+
+            }
+
+
+            .brand-logo {
+
+                width: 48px;
+
+                height: 48px;
+
+            }
+
+
+            .brand .name {
+
+                font-size: 15px;
+
+            }
+
+
+            .nav-links {
+
+                padding:
+                    16px 12px;
+
+            }
+
+
+            .nav-item {
+
+                min-height: 49px;
+
+                font-size: 13px;
+
+            }
+
+
+            .topbar {
+
+                min-height: 70px;
+
+                gap: 8px;
+
+            }
+
+
+            .hamburger {
+
+                width: 40px;
+
+                height: 40px;
+
+                border-radius: 10px;
+
+            }
+
+
+            .topbar-left {
+
+                gap: 9px;
+
+            }
+
+
+            .topbar h2 {
+
+                font-size: 16px;
+
+            }
+
+
+            .topbar .sub {
+
+                max-width: 165px;
+
+                font-size: 10.5px;
+
+            }
+
+
+            .live-clock {
+
+                min-width: auto;
+
+                padding: 9px;
+
+                font-size: 11px;
+
+            }
+
+
+            .live-clock::before {
+
+                margin-right: 4px;
+
+            }
+
+
+            .content {
+
+                padding:
+                    14px 12px 28px;
+
+            }
+
+
+            .card {
+
+                padding: 15px;
+
+                border-radius: 14px;
+
+            }
+
+
+            .punch-card {
+
+                padding: 20px 16px;
+
+                border-radius: 16px;
+
+            }
+
+
+            .clock {
+
+                font-size: 35px;
+
+            }
+
+
+            .punch-status-row {
+
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+
+                gap: 6px;
+
+            }
+
+
+            .punch-status-item {
+
+                padding: 11px 5px;
+
+            }
+
+
+            .punch-status-item .lbl {
+
+                font-size: 8px;
+
+            }
+
+
+            .punch-status-item .val {
+
+                font-size: 10px;
+
+            }
+
+
+            .punch-actions {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .grid-2,
+            .grid-3 {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            #monthStatsGrid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .stat-card {
+
+                min-height: 82px;
+
+                padding: 13px;
+
+            }
+
+
+            .stat-card .icon {
+
+                width: 45px;
+
+                height: 45px;
+
+            }
+
+
+            .stat-card .value {
+
+                font-size: 21px;
+
+            }
+
+
+            .leave-balance-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 9px;
+
+            }
+
+
+            .leave-balance-item {
+
+                min-height: 85px;
+
+                padding: 12px 8px;
+
+            }
+
+
+            .lb-num {
+
+                font-size: 21px;
+
+            }
+
+
+            .lb-label {
+
+                font-size: 10px;
+
+            }
+
+
+            .section-header {
+
+                flex-direction: column;
+
+                gap: 10px;
+
+            }
+
+
+            .section-header .btn {
+
+                width: 100%;
+
+            }
+
+
+            .filters-bar {
+
+                padding: 12px;
+
+                gap: 9px;
+
+            }
+
+
+            .filters-bar .field {
+
+                width: 100%;
+
+            }
+
+
+            .filters-bar .btn {
+
+                width:
+                    calc(33.333% - 6px);
+
+                padding: 8px 5px;
+
+                font-size: 10px;
+
+            }
+
+
+            .field {
+
+                margin-bottom: 12px;
+
+            }
+
+
+            .field input,
+            .field select {
+
+                min-height: 44px;
+
+                font-size: 16px;
+
+            }
+
+
+            table {
+
+                min-width: 620px;
+
+            }
+
+
+            th {
+
+                padding: 12px;
+
+                font-size: 9.5px;
+
+            }
+
+
+            td {
+
+                padding: 12px;
+
+                font-size: 11px;
+
+            }
+
+
+            .modal-backdrop {
+
+                padding: 12px;
+
+                align-items: flex-end;
+
+            }
+
+
+            .modal {
+
+                max-height: 90vh;
+
+                padding: 20px 16px;
+
+                border-radius: 20px 20px 12px 12px;
+
+            }
+
+
+            .modal h3 {
+
+                font-size: 17px;
+
+            }
+
+
+            .modal-actions {
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+
+            .modal-actions .btn {
+
+                width: 100%;
+
+            }
+
+
+            .profile-info-row {
+
+                font-size: 11px;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 380px) {
+
+            .topbar .sub {
+
+                display: none;
+
+            }
+
+
+            .topbar h2 {
+
+                font-size: 14px;
+
+            }
+
+
+            .live-clock {
+
+                font-size: 10px;
+
+            }
+
+
+            .clock {
+
+                font-size: 30px;
+
+            }
+
+
+            .punch-status-item .val {
+
+                font-size: 9px;
+
+            }
+
+
+            .leave-balance-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .filters-bar .btn {
+
+                width: 100%;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           SAFE AREA
+        ========================================================= */
+
+        @supports (
+            padding:
+            max(0px)
+        ) {
+
+            .sidebar {
+
+                padding-bottom:
+                    max(
+                        0px,
+                        env(safe-area-inset-bottom)
+                    );
+
+            }
+
+
+            .content {
+
+                padding-bottom:
+                    max(
+                        30px,
+                        env(safe-area-inset-bottom)
+                    );
+
+            }
+
+        }
+
+
+/* =========================================================
+   GLOBAL BUTTON MESSAGE TOAST
+========================================================= */
+#globalActionToast {
+    position: fixed;
+    top: 96px;
+    right: 24px;
+    z-index: 99999;
+    min-width: 280px;
+    max-width: 390px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px;
+    box-shadow: 0 18px 45px rgba(8,29,53,.28);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-14px) translateX(20px);
+    transition: .3s ease;
+    pointer-events: none;
+}
+#globalActionToast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) translateX(0);
+}
+#globalActionToast.success {
+    background: linear-gradient(135deg, #0f8f5b, var(--green));
+}
+#globalActionToast.error {
+    background: linear-gradient(135deg, #b52f48, var(--red));
+}
+#globalActionToast.info {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+}
+#globalActionToast .toast-action-icon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255,255,255,.14);
+    font-size: 18px;
+}
+#globalActionToast .toast-action-text {
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+@media (max-width: 575px) {
+    #globalActionToast {
+        top: 82px;
+        left: 12px;
+        right: 12px;
+        min-width: 0;
+        max-width: none;
+    }
+}
+
+    
+/* ===== MOBILE MENU CLICK FIX ===== */
+.hamburger{
+    position:relative !important;
+    z-index:1301 !important;
+    pointer-events:auto !important;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+}
+.topbar{z-index:1000;}
+.sidebar{z-index:1200;}
+.overlay{z-index:1150;}
+@media (max-width:1050px){
+    .sidebar{
+        transform:translate3d(-105%,0,0);
+        visibility:hidden;
+        pointer-events:none;
+    }
+    .sidebar.active{
+        transform:translate3d(0,0,0);
+        visibility:visible;
+        pointer-events:auto;
+    }
+    .overlay.active{
+        display:block;
+        pointer-events:auto;
+    }
+}
+
+
+
+/* ===== ORIGINAL DASHBOARD COMPATIBILITY + FULL RESPONSIVE ===== */
+.brand-logo{width:54px;height:54px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:15px;background:#fff;padding:5px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.brand-logo img{width:100%;height:100%;object-fit:contain}
+.card h3 i,.section-header h2 i{color:var(--gold-dark);margin-right:7px}
+.punch-card .btn-outline:hover{color:#fff!important;background:rgba(255,255,255,.1)!important}
+#leaveBalanceGrid.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cal-grid{width:100%;min-width:0}
+.cal-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+.overlay{pointer-events:none}
+.overlay.active{pointer-events:auto}
+.hamburger{position:relative!important;z-index:1301!important;pointer-events:auto!important;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.sidebar{z-index:1200!important}
+.overlay{z-index:1150!important}
+.topbar{z-index:1000!important}
+@media(max-width:1050px){
+ .sidebar{transform:translate3d(-105%,0,0)!important;visibility:hidden;pointer-events:none;width:min(300px,88vw)!important}
+ .sidebar.active{transform:translate3d(0,0,0)!important;visibility:visible;pointer-events:auto}
+ .main-content{width:100%!important;margin-left:0!important}
+ .hamburger{display:inline-flex!important}
+ .overlay.active{display:block!important}
+ #topGrid,#profileGrid{grid-template-columns:1fr!important}
+}
+@media(max-width:768px){
+ .grid-2,.grid-3,#leaveBalanceGrid.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .filters-bar{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));align-items:end}
+ .filters-bar .field{width:100%!important;min-width:0}
+ .filters-bar .btn{width:100%!important}
+ .filter-sep{display:none}
+ #tab-calendar .section-header{flex-direction:column;align-items:flex-start}
+ #tab-calendar .section-header>div{width:100%;display:grid!important;grid-template-columns:1fr 1fr}
+ #tab-calendar select{width:100%}
+}
+@media(max-width:575px){
+ .content{padding:14px 10px 28px!important}
+ .topbar{padding:10px 12px!important}
+ .topbar h2{font-size:16px!important}
+ .topbar .sub{max-width:145px!important;font-size:10px!important}
+ .live-clock{min-width:auto!important;padding:8px!important;font-size:10px!important}
+ .card{padding:15px!important}
+ .punch-card{padding:20px 14px!important}
+ .clock{font-size:32px!important}
+ .punch-status-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}
+ .punch-status-item{padding:10px 4px!important;min-width:0}
+ .punch-status-item .lbl{font-size:8px!important}
+ .punch-status-item .val{font-size:10px!important;overflow-wrap:anywhere}
+ .punch-actions{grid-template-columns:1fr!important}
+ .grid-2,.grid-3,#monthStatsGrid,#leaveBalanceGrid.grid-3{grid-template-columns:1fr!important}
+ .stat-card{min-height:82px!important;padding:13px!important}
+ .filters-bar{grid-template-columns:1fr!important;padding:12px!important}
+ .field input,.field select{font-size:16px!important}
+ .section-header{flex-direction:column;align-items:flex-start!important}
+ .table-wrap{overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+ table{min-width:620px!important}
+ .profile-info-row b{max-width:55%;overflow-wrap:anywhere}
+}
+@media(max-width:380px){
+ .topbar .sub{display:none}
+ .live-clock{font-size:9px!important}
+ .punch-status-row{grid-template-columns:1fr!important}
+ .punch-status-item{display:flex;justify-content:space-between;align-items:center;text-align:left!important}
+}
+@media(hover:none){.card:hover,.stat-card:hover,.nav-item:hover,.btn:hover{transform:none!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+</style>
+
+<style id="punch-card-alignment-fix">
+/* ===== PUNCH CARD BUTTON ALIGNMENT + BETTER DESIGN ===== */
+.punch-card{
+    display:flex;
+    flex-direction:column;
+    min-height:100%;
+}
+.punch-actions{
+    width:100%;
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:12px !important;
+    align-items:stretch;
+    margin-top:22px !important;
+}
+.punch-actions .btn{
+    width:100% !important;
+    min-width:0 !important;
+    min-height:54px !important;
+    height:54px !important;
+    margin:0 !important;
+    padding:0 14px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:9px !important;
+    border-radius:14px !important;
+    font-size:15px !important;
+    font-weight:700 !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+    overflow:hidden;
+}
+.punch-actions .btn i{
+    width:20px;
+    height:20px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 20px;
+    font-size:18px;
+}
+#punchInBtn{
+    color:#0b2947 !important;
+    border:1px solid rgba(255,255,255,.08) !important;
+    background:linear-gradient(135deg,#f4d66c,#c9a227) !important;
+    box-shadow:0 10px 24px rgba(201,162,39,.25) !important;
+}
+#punchOutBtn{
+    color:#fff !important;
+    border:1px solid rgba(255,255,255,.28) !important;
+    background:rgba(255,255,255,.08) !important;
+    box-shadow:none !important;
+    backdrop-filter:blur(8px);
+}
+#punchInBtn:hover:not(:disabled){
+    transform:translateY(-2px);
+    background:linear-gradient(135deg,#ffe68b,#d4aa28) !important;
+}
+#punchOutBtn:hover:not(:disabled){
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.15) !important;
+    border-color:rgba(255,255,255,.5) !important;
+}
+.punch-actions .btn:disabled{
+    opacity:.48 !important;
+    cursor:not-allowed !important;
+    transform:none !important;
+    filter:saturate(.7);
+}
+#myAttMsg{
+    width:100%;
+    margin-top:14px !important;
+    padding:0 4px;
+    text-align:center;
+    line-height:1.45;
+}
+#targetHoursNote{
+    font-weight:700;
+    color:#f3d66b;
+}
+.punch-card > .text-muted:last-child{
+    width:100%;
+    padding:0 8px;
+    text-align:center;
+    line-height:1.45;
+}
+
+/* Tablet and mobile: keep both buttons equal and aligned */
+@media(max-width:768px){
+    .punch-actions{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:10px !important;
+    }
+    .punch-actions .btn{
+        min-height:52px !important;
+        height:52px !important;
+        padding:0 10px !important;
+        font-size:14px !important;
+    }
+}
+@media(max-width:420px){
+    .punch-actions{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:8px !important;
+    }
+    .punch-actions .btn{
+        min-height:50px !important;
+        height:50px !important;
+        padding:0 7px !important;
+        gap:6px !important;
+        font-size:12.5px !important;
+        border-radius:12px !important;
+    }
+    .punch-actions .btn i{
+        width:17px;
+        height:17px;
+        flex-basis:17px;
+        font-size:15px;
+    }
+}
+@media(max-width:340px){
+    .punch-actions{
+        grid-template-columns:1fr !important;
+    }
+}
+</style>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+</script>
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo"><img src="img/fab.png" alt="Maxim Realty"></div>
+      <div class="name">Maxim Realty <small>Attendance System</small></div>
+    </div>
+    <nav class="nav-links">
+      <a href="#" class="nav-item active" data-tab="dashboard"><span class="icon"><i class="bi bi-grid-1x2-fill"></i></span> My Dashboard</a>
+      <a href="#" class="nav-item" data-tab="leave"><span class="icon"><i class="bi bi-calendar2-check-fill"></i></span> Leave</a>
+      <a href="#" class="nav-item" data-tab="regularization"><span class="icon"><i class="bi bi-clipboard2-check-fill"></i></span> Regularization</a>
+      <a href="#" class="nav-item" data-tab="payslips"><span class="icon"><i class="bi bi-wallet2"></i></span> Payslips</a>
+      <a href="#" class="nav-item" data-tab="calendar"><span class="icon"><i class="bi bi-calendar3"></i></span> Calendar</a>
+      <a href="#" class="nav-item" data-tab="performance"><span class="icon"><i class="bi bi-graph-up-arrow"></i></span> My Performance</a>
+      <a href="#" class="nav-item" data-tab="documents"><span class="icon"><i class="bi bi-folder2-open"></i></span> Documents</a>
+      <a href="#" class="nav-item" data-tab="tasks"><span class="icon"><i class="bi bi-list-check"></i></span> Daily Tasks</a>
+      <a href="#" class="nav-item" data-tab="fieldvisits"><span class="icon"><i class="bi bi-geo-alt-fill"></i></span> Field Visits</a>
+      <a href="#" class="nav-item" data-tab="profile"><span class="icon"><i class="bi bi-person-badge-fill"></i></span> My Profile</a>
+    </nav>
+    <div class="footer-user">
+      <div class="avatar-row">
+        <div class="avatar-circle" id="sidebarAvatar">-</div>
+        <div>
+          <div class="who" id="sidebarName">-</div>
+          <div class="role" id="sidebarRole">-</div>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-block btn-sm" id="logoutBtn" style="border-color:rgba(255,255,255,0.2); color:#c9a227; margin-top:12px;"><i class="bi bi-box-arrow-right"></i> Logout</button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open Menu"><i class="bi bi-list" id="menuIcon"></i></button>
+        <div>
+          <h2 id="pageTitle">My Dashboard</h2>
+          <div class="sub" id="welcomeMsg">Welcome back!</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="live-clock" id="topClock">--:--:--</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ============ DASHBOARD TAB ============ -->
+      <div class="tab-panel" id="tab-dashboard">
+        <div id="celebrationBanner"></div>
+        <div class="grid" style="grid-template-columns: 1.1fr 1.9fr; align-items:start;" id="topGrid">
+
+          <div class="punch-card">
+            <div class="clock" id="bigClock">--:--:--</div>
+            <div class="date-line" id="bigDate">-</div>
+
+            <div class="punch-status-row">
+              <div class="punch-status-item">
+                <div class="lbl">Punch In</div>
+                <div class="val" id="punchInVal">--:--</div>
+              </div>
+              <div class="punch-status-item">
+                <div class="lbl">Punch Out</div>
+                <div class="val" id="punchOutVal">--:--</div>
+              </div>
+              <div class="punch-status-item">
+                <div class="lbl">Status</div>
+                <div class="val"><span class="badge badge-active" id="statusVal">Not Marked</span></div>
+              </div>
+            </div>
+
+            <div class="punch-actions">
+              <button class="btn btn-gold" id="punchInBtn"><i class="bi bi-play-circle-fill"></i> Punch In</button>
+              <button class="btn btn-outline" id="punchOutBtn" style="border-color:rgba(255,255,255,0.4); color:#fff;"><i class="bi bi-stop-circle-fill"></i> Punch Out</button>
+            </div>
+            <!-- <div class="text-muted" id="myAttMsg" style="margin-top:8px; font-size:12.5px; color:rgba(255,255,255,0.75);"></div> -->
+          </div>
+
+          <div class="card">
+            <h3><i class="bi bi-bar-chart-line-fill"></i> This Month at a Glance</h3>
+            <div class="grid grid-3" id="monthStatsGrid">
+              <div class="stat-card">
+                <div class="icon icon-green"><i class="bi bi-check-circle-fill"></i></div>
+                <div>
+                  <div class="value" id="presentCount">0</div>
+                  <div class="label">Present Days</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="icon icon-orange"><i class="bi bi-clock-fill"></i></div>
+                <div>
+                  <div class="value" id="lateCount">0</div>
+                  <div class="label">Late Days</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="icon icon-blue"><i class="bi bi-calendar3"></i></div>
+                <div>
+                  <div class="value" id="totalDaysCount">0</div>
+                  <div class="label">Days Recorded</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="icon icon-green"><i class="bi bi-graph-up-arrow"></i></div>
+                <div>
+                  <div class="value" id="attPercentCount">-</div>
+                  <div class="label">Attendance This Month</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="icon icon-orange"><i class="bi bi-fire"></i></div>
+                <div>
+                  <div class="value" id="streakCount">0</div>
+                  <div class="label">Punctual Streak</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="icon icon-blue"><i class="bi bi-stopwatch-fill"></i></div>
+                <div>
+                  <div class="value" id="overtimeCount">0h 0m</div>
+                  <div class="label">Overtime This Month</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:20px;"></div>
+
+        <div class="card" id="upcomingFestivalsCard">
+          <div class="section-header">
+            <h2 style="font-size:16px;"><i class="bi bi-stars"></i> Upcoming Festivals</h2>
+          </div>
+          <div id="upcomingFestivalsList" class="festival-list">Loading...</div>
+        </div>
+
+        <div style="height:20px;"></div>
+
+        <div class="card">
+          <div class="section-header">
+            <h2 style="font-size:16px;"><i class="bi bi-clock-history"></i> Attendance History</h2>
+          </div>
+
+          <div class="filters-bar">
+            <div class="field">
+              <label>Month</label>
+              <select id="monthSelect"></select>
+            </div>
+            <div class="field">
+              <label>Year</label>
+              <select id="yearSelect"></select>
+            </div>
+            <span class="filter-sep">or</span>
+            <div class="field">
+              <label>From Date</label>
+              <input type="date" id="fromDate" />
+            </div>
+            <div class="field">
+              <label>To Date</label>
+              <input type="date" id="toDate" />
+            </div>
+            <button class="btn btn-outline btn-sm" id="quickTodayBtn">Today</button>
+            <button class="btn btn-outline btn-sm" id="quickWeekBtn">This Week</button>
+            <button class="btn btn-outline btn-sm" id="clearRangeBtn">Clear</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Punch In</th>
+                  <th>Punch Out</th>
+                  <th>Work Hours</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody">
+                <tr class="empty-row"><td colspan="5">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ LEAVE TAB ============ -->
+      <div class="tab-panel" id="tab-leave" style="display:none;">
+        <div class="grid grid-3" id="leaveBalanceGrid" style="margin-bottom:20px;">
+          <!-- filled by JS -->
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <h3><i class="bi bi-calendar-plus-fill"></i> Apply for Leave</h3>
+          <div class="grid grid-2">
+            <div class="field">
+              <label>Leave Type</label>
+              <select id="leaveType">
+                <option value="casual">Casual Leave</option>
+                <option value="sick">Sick Leave</option>
+                <option value="earned">Earned Leave</option>
+                <option value="unpaid">Unpaid Leave</option>
+              </select>
+            </div>
+            <div class="field"></div>
+            <div class="field">
+              <label>From Date</label>
+              <input type="date" id="leaveFrom" />
+            </div>
+            <div class="field">
+              <label>To Date</label>
+              <input type="date" id="leaveTo" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Reason</label>
+            <input type="text" id="leaveReason" placeholder="Briefly describe the reason for leave" />
+          </div>
+          <button class="btn btn-gold" id="leaveApplyBtn"><i class="bi bi-send-fill"></i> Submit Leave Request</button>
+        </div>
+
+        <div class="card">
+          <h3><i class="bi bi-clock-history"></i> My Leave History</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Type</th><th>From</th><th>To</th><th>Days</th><th>Reason</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="leaveHistoryBody"><tr class="empty-row"><td colspan="7">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ REGULARIZATION TAB ============ -->
+      <div class="tab-panel" id="tab-regularization" style="display:none;">
+        <div class="card" style="margin-bottom:20px;">
+          <h3><i class="bi bi-clipboard2-check-fill"></i> Request Attendance Correction</h3>
+          <p class="text-muted" style="margin-top:-8px; font-size:13px;">Missed a punch, or made a mistake? Ask your manager/admin to correct it.</p>
+          <div class="grid grid-2">
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="regDate" />
+            </div>
+            <div class="field"></div>
+            <div class="field">
+              <label>Correct Punch In</label>
+              <input type="time" id="regPunchIn" />
+            </div>
+            <div class="field">
+              <label>Correct Punch Out</label>
+              <input type="time" id="regPunchOut" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Reason</label>
+            <input type="text" id="regReason" placeholder="e.g. Forgot to punch out yesterday" />
+          </div>
+          <button class="btn btn-gold" id="regApplyBtn"><i class="bi bi-send-check-fill"></i> Submit Request</button>
+        </div>
+
+        <div class="card">
+          <h3><i class="bi bi-journal-check"></i> My Regularization Requests</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Date</th><th>Requested In</th><th>Requested Out</th><th>Reason</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="regHistoryBody"><tr class="empty-row"><td colspan="6">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PAYSLIPS TAB ============ -->
+      <div class="tab-panel" id="tab-payslips" style="display:none;">
+        <div class="card">
+          <h3><i class="bi bi-wallet2"></i> My Payslips</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Month</th><th>Gross Earnings</th><th>Deductions</th><th>Net Pay</th><th>Actions</th></tr></thead>
+              <tbody id="payslipsBody"><tr class="empty-row"><td colspan="5">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ CALENDAR TAB ============ -->
+      <div class="tab-panel" id="tab-calendar" style="display:none;">
+        <div class="card">
+          <div class="section-header">
+            <h2 style="font-size:16px;"><i class="bi bi-calendar3"></i> My Calendar</h2>
+            <div style="display:flex; gap:10px;">
+              <select id="calMonth"></select>
+              <select id="calYear"></select>
+            </div>
+          </div>
+          <div class="cal-legend" style="display:flex; gap:14px; margin-bottom:14px; font-size:12.5px; flex-wrap:wrap;">
+            <span><span class="cal-dot" style="background:#e3f7ec;"></span> Present/Worked</span>
+            <span><span class="cal-dot" style="background:#fdf1e2;"></span> Late</span>
+            <span><span class="cal-dot" style="background:#e7edf7;"></span> Weekly Off</span>
+            <span><span class="cal-dot" style="background:#fdecec;"></span> Holiday</span>
+            <span><span class="cal-dot" style="background:#f3e8fd;"></span> On Leave</span>
+          </div>
+          <div class="cal-grid" id="calGrid">Loading...</div>
+        </div>
+
+        <div class="card" id="festivalCard">
+          <div class="section-header">
+            <h3 style="margin:0;"><i class="bi bi-stars"></i> Festival Calendar</h3>
+            <select id="holidayYearFilter" style="max-width:140px;"></select>
+          </div>
+          <p class="text-muted" style="margin-top:-8px; font-size:13px;">All company holidays and festivals set by your admin.</p>
+          <div id="festivalList" class="festival-list">Loading...</div>
+        </div>
+      </div>
+
+      <!-- ============ MY PERFORMANCE TAB ============ -->
+      <div class="tab-panel" id="tab-performance" style="display:none;">
+        <div class="card">
+          <div class="section-header">
+            <h2 style="font-size:16px;"><i class="bi bi-graph-up-arrow"></i> My Performance</h2>
+            <div style="display:flex; gap:10px;">
+              <select id="perfMonth"></select>
+              <select id="perfYear"></select>
+            </div>
+          </div>
+          <p class="text-muted" style="margin-top:-8px; font-size:13px;">
+            Performance Score = 50% Attendance rate + 30% Punctuality rate + 20% Leave discipline. Calculated automatically from your real attendance &amp; leave records.
+          </p>
+          <div style="text-align:center; margin:20px 0;">
+            <div id="perfScoreCircle" style="display:inline-flex; align-items:center; justify-content:center; width:120px; height:120px; border-radius:50%; font-size:32px; font-weight:800; color:#fff; background:var(--navy);">-</div>
+            <div class="text-muted" style="margin-top:8px; font-size:13px;">out of 100</div>
+          </div>
+          <div class="grid grid-4" id="perfStatsGrid">
+            <div class="stat-card">
+              <div class="icon icon-green"><i class="bi bi-check-circle-fill"></i></div>
+              <div><div class="value" id="perfAttendance">-</div><div class="label">Attendance %</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="icon icon-blue"><i class="bi bi-calendar2-heart-fill"></i></div>
+              <div><div class="value" id="perfLeaves">-</div><div class="label">Leaves Used</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="icon icon-orange"><i class="bi bi-clock-fill"></i></div>
+              <div><div class="value" id="perfLate">-</div><div class="label">Late Count</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="icon icon-green"><i class="bi bi-hourglass-split"></i></div>
+              <div><div class="value" id="perfOvertime">-</div><div class="label">Overtime</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🏆 Department Leaderboard</h3>
+          <p class="text-muted" style="margin-top:-8px; font-size:13px;">Ranked by attendance + punctuality this month, within your department.</p>
+          <div id="leaderboardList">Loading...</div>
+        </div>
+      </div>
+
+      <!-- ============ DOCUMENTS TAB ============ -->
+      <div class="tab-panel" id="tab-documents" style="display:none;">
+        <div class="card">
+          <h3><i class="bi bi-cloud-upload-fill"></i> Upload a Document</h3>
+          <p class="text-muted" style="margin-top:-8px; font-size:13px;">
+            You can upload your own Aadhaar, PAN, Resume, or other personal documents. Offer Letter, Salary Slip and Experience Letter are official HR records issued by Admin.
+          </p>
+          <div class="grid grid-2">
+            <div class="field">
+              <label>Document Type</label>
+              <select id="docType"></select>
+            </div>
+            <div class="field">
+              <label>File</label>
+              <input type="file" id="docFile" accept=".pdf,.jpg,.jpeg,.png" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Note (optional)</label>
+            <input type="text" id="docNote" placeholder="e.g. Updated Aadhaar copy" />
+          </div>
+          <button class="btn btn-gold" id="docUploadBtn"><i class="bi bi-upload"></i> Upload Document</button>
+          <div class="text-muted" id="docFileName" style="font-size:12px; margin-top:6px;"></div>
+        </div>
+
+        <div class="card">
+          <h3><i class="bi bi-folder2-open"></i> My Documents</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Type</th><th>File</th><th>Note</th><th>Uploaded By</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="documentsBody"><tr class="empty-row"><td colspan="6">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ DAILY TASKS TAB ============ -->
+      <div class="tab-panel" id="tab-tasks" style="display:none;">
+        <div class="card">
+          <h3><i class="bi bi-plus-circle-fill"></i> Add a Task</h3>
+          <div class="grid grid-2">
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="taskDate" />
+            </div>
+            <div class="field">
+              <label>Priority</label>
+              <select id="taskPriority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Title</label>
+            <input type="text" id="taskTitle" placeholder="e.g. Follow up with 3 leads" />
+          </div>
+          <div class="field">
+            <label>Description (optional)</label>
+            <input type="text" id="taskDescription" />
+          </div>
+          <button class="btn btn-gold" id="taskAddBtn"><i class="bi bi-plus-lg"></i> Add Task</button>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <h2 style="font-size:16px;">My Tasks</h2>
+          </div>
+          <div class="filters-bar">
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="taskFilterDate" />
+            </div>
+            <div class="field">
+              <label>Status</label>
+              <select id="taskFilterStatus">
+                <option value="">All</option>
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+            <button class="btn btn-outline btn-sm" id="taskClearFilter">Clear</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Date</th><th>Title</th><th>Priority</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="tasksBody"><tr class="empty-row"><td colspan="5">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ FIELD VISITS TAB ============ -->
+      <div class="tab-panel" id="tab-fieldvisits" style="display:none;">
+        <div class="card">
+          <h3><i class="bi bi-geo-alt-fill"></i> Check In to a Client / Site Visit</h3>
+          <p class="text-muted" style="margin-top:-8px; font-size:13px;">Uses your device's live GPS location.</p>
+          <div class="grid grid-2">
+            <div class="field">
+              <label>Client / Site Name</label>
+              <input type="text" id="fvClientName" placeholder="e.g. Mr. Verma - Site Visit" />
+            </div>
+            <div class="field">
+              <label>Purpose (optional)</label>
+              <input type="text" id="fvPurpose" placeholder="e.g. Property showing" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Note (optional)</label>
+            <input type="text" id="fvNote" />
+          </div>
+          <button class="btn btn-gold" id="fvCheckinBtn">📍 Check In Here</button>
+          <span class="text-muted" id="fvMsg" style="font-size:12.5px; margin-left:10px;"></span>
+        </div>
+
+        <div class="card">
+          <h3>My Visit Log</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Client/Site</th><th>Checked In</th><th>Checked Out</th><th>Location</th><th>Actions</th></tr></thead>
+              <tbody id="fieldVisitsBody"><tr class="empty-row"><td colspan="5">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PROFILE TAB ============ -->
+      <div class="tab-panel" id="tab-profile" style="display:none;">
+        <div class="grid" style="grid-template-columns: 1fr 1.4fr; align-items:start;" id="profileGrid">
+
+          <div class="card" style="text-align:center;">
+            <div class="avatar-circle-lg" id="profileAvatar">-</div>
+            <h3 style="margin:14px 0 2px; font-size:18px;" id="profileName">-</h3>
+            <div class="text-muted" id="profileDesig" style="font-size:13.5px;">-</div>
+            <span class="badge badge-active" id="profileRoleBadge" style="margin-top:10px; display:inline-block;">Employee</span>
+
+            <div class="profile-info-list">
+              <div class="profile-info-row"><span>Employee Code</span><b id="pfCode">-</b></div>
+              <div class="profile-info-row"><span>Username</span><b id="pfUsername">-</b></div>
+              <div class="profile-info-row"><span>Department</span><b id="pfDept">-</b></div>
+              <div class="profile-info-row"><span>Joined On</span><b id="pfJoin">-</b></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3><i class="bi bi-person-lines-fill"></i> Contact Details</h3>
+            <div class="grid grid-2">
+              <div class="field">
+                <label>Email Address</label>
+                <input type="email" id="pfEmail" />
+              </div>
+              <div class="field">
+                <label>Phone Number</label>
+                <input type="text" id="pfPhone" />
+              </div>
+            </div>
+            <button class="btn btn-primary" id="pfSaveBtn"><i class="bi bi-check-circle-fill"></i> Save Changes</button>
+
+            <hr class="divider" />
+
+            <h3><i class="bi bi-shield-lock-fill"></i> Change Password</h3>
+            <div class="grid grid-2">
+              <div class="field">
+                <label>Current Password</label>
+                <input type="password" id="curPwd" />
+              </div>
+              <div class="field">
+                <label>New Password</label>
+                <input type="password" id="newPwd" />
+              </div>
+              <div class="field">
+                <label>Confirm New Password</label>
+                <input type="password" id="confirmNewPwd" />
+              </div>
+            </div>
+            <button class="btn btn-outline" id="pwdSaveBtn"><i class="bi bi-key-fill"></i> Update Password</button>
+          </div>
+        </div>
+
+        <div class="card" id="faceEnrollCard">
+          <div class="section-header">
+            <h2 style="font-size:16px;">🙂 Face Punch Enrollment</h2>
+            <span class="badge badge-inactive" id="faceEnrollStatusBadge">Not Enrolled</span>
+          </div>
+          <p class="text-muted" style="margin-top:-8px; font-size:13px;">
+            Enroll your face once, then punch in/out at the <b>Face Punch Kiosk</b> — no password needed. Your camera detects your face and marks attendance automatically. The captured photo is kept as an audit record only.
+          </p>
+          <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start;">
+            <div>
+              <video id="faceEnrollVideo" autoplay playsinline muted style="width:220px; height:165px; border-radius:10px; background:#111; object-fit:cover;"></video>
+              <canvas id="faceEnrollCanvas" style="display:none;"></canvas>
+            </div>
+            <div style="flex:1; min-width:200px;">
+              <img id="faceEnrollPreview" style="width:120px; height:120px; border-radius:10px; object-fit:cover; display:none; margin-bottom:10px;" />
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn btn-outline btn-sm" id="faceEnrollStartCamBtn">📷 Start Camera</button>
+                <button class="btn btn-primary btn-sm" id="faceEnrollCaptureBtn" disabled>Capture &amp; Save</button>
+                <button class="btn btn-outline btn-sm" id="faceEnrollRemoveBtn" style="display:none;">Remove Enrollment</button>
+              </div>
+              <div class="text-muted" id="faceEnrollMsg" style="font-size:12.5px; margin-top:8px;"></div>
+              <a href="/face-punch.html" target="_blank" class="btn btn-outline btn-sm" style="margin-top:10px; display:inline-block;">🎯 Open Face Punch Kiosk</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+
+<script>
+(function(){
+ "use strict";
+ document.addEventListener("DOMContentLoaded",function(){
+   const sidebar=document.getElementById("sidebar");
+   const overlay=document.getElementById("overlay");
+   const btn=document.getElementById("hamburgerBtn");
+   const icon=document.getElementById("menuIcon");
+   if(!sidebar||!overlay||!btn)return;
+   const isMobile=()=>window.innerWidth<=1050;
+   function setMenu(open){
+     sidebar.classList.toggle("active",open);
+     overlay.classList.toggle("active",open);
+     if(icon) icon.className=open?"bi bi-x-lg":"bi bi-list";
+     btn.setAttribute("aria-expanded",open?"true":"false");
+     btn.setAttribute("aria-label",open?"Close Menu":"Open Menu");
+     document.body.style.overflow=open&&isMobile()?"hidden":"";
+   }
+   btn.addEventListener("click",function(e){
+     e.preventDefault(); e.stopPropagation();
+     setMenu(!sidebar.classList.contains("active"));
+   });
+   overlay.addEventListener("click",()=>setMenu(false));
+   document.querySelectorAll(".nav-item").forEach(item=>{
+     item.addEventListener("click",()=>{if(isMobile())setMenu(false)});
+   });
+   document.addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false)});
+   window.addEventListener("resize",()=>{if(!isMobile())setMenu(false)});
+ });
+})();
+</script>
+
+</body>
+</html>
