@@ -30,10 +30,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(bodyParser.json({ limit: '8mb' })); // higher limit to allow uploaded payslip PDFs
+
+app.use(bodyParser.json({ limit: '8mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// API routes
+// ==========================================================
+// API ROUTES
+// ==========================================================
+
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/attendance', attendanceRoutes);
@@ -51,83 +55,155 @@ app.use('/api/tasks', tasksRoutes);
 app.use('/api/fieldvisits', fieldVisitsRoutes);
 app.use('/api/payroll', payrollRoutes);
 
-// GET /api/live - real-time event stream (Server-Sent Events).
-// Any logged-in user can connect; admins/managers typically use this to get
-// live punch-in/out, leave, and regularization updates on their dashboard
-// without polling.
+// ==========================================================
+// LIVE EVENTS - SERVER SENT EVENTS
+// ==========================================================
+
 app.get('/api/live', authenticate, (req, res) => {
-  res.set({
-    'Content-Type': 'text/event-stream',
-    'Cache-Control': 'no-cache',
-    Connection: 'keep-alive'
-  });
-  res.flushHeaders();
-  res.write(`data: ${JSON.stringify({ type: 'connected', payload: {}, time: new Date().toISOString() })}\n\n`);
 
-  events.addClient(res);
+    res.set({
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive'
+    });
 
-  // Heartbeat so proxies/browsers don't time out the connection
-  const heartbeat = setInterval(() => {
-    try { res.write(': ping\n\n'); } catch (e) { /* ignore */ }
-  }, 25000);
+    res.flushHeaders();
 
-  req.on('close', () => {
-    clearInterval(heartbeat);
-    events.removeClient(res);
-  });
+    res.write(
+        `data: ${JSON.stringify({
+            type: 'connected',
+            payload: {},
+            time: new Date().toISOString()
+        })}\n\n`
+    );
+
+    events.addClient(res);
+
+    // Heartbeat
+    const heartbeat = setInterval(() => {
+        try {
+            res.write(': ping\n\n');
+        } catch (e) {
+            // Ignore errors
+        }
+    }, 25000);
+
+    req.on('close', () => {
+        clearInterval(heartbeat);
+        events.removeClient(res);
+    });
 });
 
-// Health check
+// ==========================================================
+// HEALTH CHECK
+// ==========================================================
+
 app.get('/api/health', (req, res) => {
-  res.json({ success: true, message: 'Maxim Realty Attendance System API is running', time: new Date().toISOString() });
+
+    res.json({
+        success: true,
+        message: 'Maxim Realty Attendance System API is running',
+        time: new Date().toISOString()
+    });
+
 });
 
-// Extensionless HTML routes
-app.get('/:page', (req, res, next) => {
-    const page = req.params.page;
+// ==========================================================
+// HTML PAGE CONFIGURATION
+// ==========================================================
 
-    // Only allow HTML pages
-    const allowedPages = [
-        'admin',
-        'dashboard',
-        'face-punch',
-        'forgot-password'
-    ];
+const allowedPages = [
+    'admin',
+    'dashboard',
+    'face-punch',
+    'forgot-password'
+];
+
+// ==========================================================
+// REDIRECT .HTML URL → CLEAN URL
+// Example:
+// /admin.html → /admin
+// /dashboard.html → /dashboard
+// ==========================================================
+
+app.get('/:page.html', (req, res, next) => {
+
+    const page = req.params.page;
 
     if (!allowedPages.includes(page)) {
         return next();
     }
 
-    res.sendFile(
-        path.join(__dirname, 'public', `${page}.html`),
-        (err) => {
-            if (err) {
-                next();
-            }
-        }
+    res.redirect(301, `/${page}`);
+
+});
+
+// ==========================================================
+// CLEAN HTML URL
+// Example:
+// /admin → public/admin.html
+// /dashboard → public/dashboard.html
+// ==========================================================
+
+app.get('/:page', (req, res, next) => {
+
+    const page = req.params.page;
+
+    if (!allowedPages.includes(page)) {
+        return next();
+    }
+
+    const filePath = path.join(
+        __dirname,
+        'public',
+        `${page}.html`
     );
+
+    res.sendFile(filePath, (err) => {
+
+        if (err) {
+            next();
+        }
+
+    });
+
 });
 
-// Serve static frontend
-app.use(express.static(path.join(__dirname, 'public')));
+// ==========================================================
+// SERVE STATIC FRONTEND FILES
+// ==========================================================
 
-// Fallback to index.html for root
+app.use(express.static(
+    path.join(__dirname, 'public')
+));
+
+// ==========================================================
+// ROOT URL
+// https://your-domain.com/
+// → public/index.html
+// ==========================================================
+
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+
+    res.sendFile(
+        path.join(
+            __dirname,
+            'public',
+            'index.html'
+        )
+    );
+
 });
 
-// Serve static frontend
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Fallback to index.html for root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// ==========================================================
+// START SERVER
+// ==========================================================
 
 app.listen(PORT, () => {
-  console.log('==========================================================');
-  console.log('  MAXIM REALTY - Attendance Management System');
-  console.log(`  Server running at: http://localhost:${PORT}`);
-  
-  console.log('==========================================================');
+
+    console.log('==========================================================');
+    console.log('  MAXIM REALTY - Attendance Management System');
+    console.log(`  Server running at: http://localhost:${PORT}`);
+    console.log('==========================================================');
+
 });
