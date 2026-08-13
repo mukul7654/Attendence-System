@@ -4,13 +4,16 @@ const API_BASE = '/api';
 function getToken() {
   return localStorage.getItem('mr_token');
 }
+
 function setToken(token) {
   localStorage.setItem('mr_token', token);
 }
-function clearToken() {f
+
+function clearToken() {
   localStorage.removeItem('mr_token');
   localStorage.removeItem('mr_user');
 }
+
 function getUser() {
   try {
     return JSON.parse(localStorage.getItem('mr_user') || 'null');
@@ -18,6 +21,7 @@ function getUser() {
     return null;
   }
 }
+
 function setUser(user) {
   localStorage.setItem('mr_user', JSON.stringify(user));
 }
@@ -35,12 +39,6 @@ async function apiRequest(path, options = {}) {
     headers
   });
 
-
-  function clearToken() {
-  localStorage.removeItem('mr_token');
-  localStorage.removeItem('mr_user');
-}
-
   let data;
   try {
     data = await res.json();
@@ -50,8 +48,8 @@ async function apiRequest(path, options = {}) {
 
   if (res.status === 401) {
     clearToken();
-    if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/') {
-      window.location.href = '/index.html';
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
     }
   }
 
@@ -63,7 +61,7 @@ async function apiRequest(path, options = {}) {
 
 function requireAuth() {
   if (!getToken()) {
-    window.location.href = '/index.html';
+    window.location.href = '/';
     return false;
   }
   return true;
@@ -72,25 +70,21 @@ function requireAuth() {
 function requireAdminRole() {
   const user = getUser();
   if (!user || user.role !== 'admin') {
-    window.location.href = '/dashboard.html';
+    window.location.href = '/dashboard';
     return false;
   }
   return true;
 }
 
-// Admin OR manager - used for the shared admin.html panel
 function requireStaffRole() {
   const user = getUser();
   if (!user || (user.role !== 'admin' && user.role !== 'manager')) {
-    window.location.href = '/dashboard.html';
+    window.location.href = '/dashboard';
     return false;
   }
   return true;
 }
 
-// Wraps navigator.geolocation in a promise. Resolves { lat, lng } on success,
-// resolves { lat: null, lng: null } if location isn't available/allowed so
-// punch in/out can still proceed when the admin hasn't turned on geofencing.
 function getCurrentLocation() {
   return new Promise((resolve) => {
     if (!navigator.geolocation) return resolve({ lat: null, lng: null });
@@ -104,7 +98,7 @@ function getCurrentLocation() {
 
 function logout() {
   clearToken();
-  window.location.href = '/index.html';
+  window.location.href = '/';
 }
 
 function showToast(message, type = '') {
@@ -131,22 +125,17 @@ function formatDate(dateStr) {
 
 function formatTime12(timeStr) {
   if (!timeStr) return '-';
-
-  // Server se aaya time UTC maana ja raha hai
   const parts = timeStr.split(':');
   const h = parseInt(parts[0], 10);
   const m = parts[1] || '00';
   const s = parts[2] || '00';
-
   const now = new Date();
-  // Aaj ki date + UTC time se Date object banao
   const utcDate = new Date(Date.UTC(
     now.getUTCFullYear(),
     now.getUTCMonth(),
     now.getUTCDate(),
     h, parseInt(m, 10), parseInt(s, 10)
   ));
-
   return utcDate.toLocaleTimeString('en-IN', {
     timeZone: 'Asia/Kolkata',
     hour: '2-digit',
