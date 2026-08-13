@@ -65,17 +65,36 @@ navItems.forEach((item) => {
 });
 
 // ---------------- Live Clock ----------------
+// ---------------- Live Clock (Asia/Kolkata) ----------------
 function tick() {
   const now = new Date();
-  const timeStr = now.toLocaleTimeString('en-IN', { hour12: true });
-  document.getElementById('topClock').textContent = timeStr;
-  document.getElementById('bigClock').textContent = timeStr;
-  document.getElementById('bigDate').textContent = now.toLocaleDateString('en-IN', {
-    weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
+  const timeStr = now.toLocaleTimeString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
   });
+  const dateStr = now.toLocaleDateString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+
+  const topClock = document.getElementById('topClock');
+  const bigClock = document.getElementById('bigClock');
+  const bigDate  = document.getElementById('bigDate');
+
+  if (topClock) topClock.textContent = timeStr;
+  if (bigClock) bigClock.textContent = timeStr;
+  if (bigDate)  bigDate.textContent  = dateStr;
 }
 tick();
 setInterval(tick, 1000);
+
+
 
 // ---------------- Punch Status ----------------
 const punchInBtn = document.getElementById('punchInBtn');
