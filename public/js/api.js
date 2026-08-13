@@ -7,7 +7,7 @@ function getToken() {
 function setToken(token) {
   localStorage.setItem('mr_token', token);
 }
-function clearToken() {
+function clearToken() {f
   localStorage.removeItem('mr_token');
   localStorage.removeItem('mr_user');
 }
@@ -45,7 +45,7 @@ async function apiRequest(path, options = {}) {
   if (res.status === 401) {
     clearToken();
     if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/') {
-      window.location.href = '/index.html';
+      window.location.href = '/';
     }
   }
 
@@ -57,7 +57,7 @@ async function apiRequest(path, options = {}) {
 
 function requireAuth() {
   if (!getToken()) {
-    window.location.href = '/index.html';
+    window.location.href = '/';
     return false;
   }
   return true;
@@ -66,7 +66,7 @@ function requireAuth() {
 function requireAdminRole() {
   const user = getUser();
   if (!user || user.role !== 'admin') {
-    window.location.href = '/dashboard.html';
+    window.location.href = '/dashboard';
     return false;
   }
   return true;
@@ -76,7 +76,7 @@ function requireAdminRole() {
 function requireStaffRole() {
   const user = getUser();
   if (!user || (user.role !== 'admin' && user.role !== 'manager')) {
-    window.location.href = '/dashboard.html';
+    window.location.href = '/dashboard';
     return false;
   }
   return true;
