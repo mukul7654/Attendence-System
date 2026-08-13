@@ -85,6 +85,25 @@ app.get('/api/health', (req, res) => {
 // Serve static frontend
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ===== Clean URLs (hide .html) =====
+app.get('/:page', (req, res, next) => {
+  const page = req.params.page;
+  // API routes ko skip karo
+  if (page === 'api') return next();
+
+  const filePath = path.join(__dirname, 'public', `${page}.html`);
+  if (require('fs').existsSync(filePath)) {
+    return res.sendFile(filePath);
+  }
+  next();
+});
+
+// Old .html links ko clean URL pe redirect
+app.get('*.html', (req, res) => {
+  const cleanUrl = req.path.replace(/\.html$/, '') || '/';
+  res.redirect(301, cleanUrl);
+});
+
 // Fallback to index.html for root
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
