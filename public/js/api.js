@@ -45,7 +45,7 @@ async function apiRequest(path, options = {}) {
   if (res.status === 401) {
     clearToken();
     if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/') {
-      window.location.href = '/';
+      window.location.href = '/index.html';
     }
   }
 
@@ -57,7 +57,7 @@ async function apiRequest(path, options = {}) {
 
 function requireAuth() {
   if (!getToken()) {
-    window.location.href = '/';
+    window.location.href = '/index.html';
     return false;
   }
   return true;
@@ -66,7 +66,7 @@ function requireAuth() {
 function requireAdminRole() {
   const user = getUser();
   if (!user || user.role !== 'admin') {
-    window.location.href = '/dashboard';
+    window.location.href = '/dashboard.html';
     return false;
   }
   return true;
@@ -76,7 +76,7 @@ function requireAdminRole() {
 function requireStaffRole() {
   const user = getUser();
   if (!user || (user.role !== 'admin' && user.role !== 'manager')) {
-    window.location.href = '/dashboard';
+    window.location.href = '/dashboard.html';
     return false;
   }
   return true;
@@ -98,7 +98,7 @@ function getCurrentLocation() {
 
 function logout() {
   clearToken();
-  window.location.href = '/';
+  window.location.href = '/index.html';
 }
 
 function showToast(message, type = '') {
