@@ -35,6 +35,12 @@ async function apiRequest(path, options = {}) {
     headers
   });
 
+
+  function clearToken() {
+  localStorage.removeItem('mr_token');
+  localStorage.removeItem('mr_user');
+}
+
   let data;
   try {
     data = await res.json();
