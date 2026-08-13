@@ -98,7 +98,7 @@ function getCurrentLocation() {
 
 function logout() {
   clearToken();
-  window.location.href = '/index.html';
+  window.location.href = '/';
 }
 
 function showToast(message, type = '') {
