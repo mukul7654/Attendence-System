@@ -125,9 +125,26 @@ function formatDate(dateStr) {
 
 function formatTime12(timeStr) {
   if (!timeStr) return '-';
-  const [h, m] = timeStr.split(':');
-  const hour = parseInt(h, 10);
-  const ampm = hour >= 12 ? 'PM' : 'AM';
-  const hour12 = hour % 12 || 12;
-  return `${hour12}:${m} ${ampm}`;
+
+  // Server se aaya time UTC maana ja raha hai
+  const parts = timeStr.split(':');
+  const h = parseInt(parts[0], 10);
+  const m = parts[1] || '00';
+  const s = parts[2] || '00';
+
+  const now = new Date();
+  // Aaj ki date + UTC time se Date object banao
+  const utcDate = new Date(Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    h, parseInt(m, 10), parseInt(s, 10)
+  ));
+
+  return utcDate.toLocaleTimeString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
 }
