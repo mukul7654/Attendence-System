@@ -188,6 +188,8 @@ async function loadTargetHours() {
 }
 loadTargetHours();
 
+
+
 function updateAttMsg(record) {
   if (!myAttMsg) return;
   if (!record || !record.punchIn) { myAttMsg.textContent = ''; return; }
@@ -197,12 +199,27 @@ function updateAttMsg(record) {
       : `Worked ${record.workHours || '0h 0m'} - under the ${targetWorkHours}h target, marked Late`;
     return;
   }
-  const [h, m, s] = record.punchIn.split(':').map(Number);
-  const punchInMs = new Date();
-  punchInMs.setHours(h, m, s || 0, 0);
-  const elapsedMs = Math.max(0, Date.now() - punchInMs.getTime());
+
+  // Punch-in time ko UTC se treat karke IST me convert
+  const parts = record.punchIn.split(':').map(Number);
+  const h = parts[0], m = parts[1], s = parts[2] || 0;
+
+  const now = new Date();
+  const punchInUtc = new Date(Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    h, m, s
+  ));
+
+  // Ab IST me convert karke elapsed time nikaalo
+  const punchInIST = new Date(punchInUtc.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+  const nowIST = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+
+  const elapsedMs = Math.max(0, nowIST.getTime() - punchInIST.getTime());
   const targetMs = targetWorkHours * 3600000;
   const remainingMs = targetMs - elapsedMs;
+
   if (remainingMs <= 0) {
     myAttMsg.textContent = '✔ Target reached - you will be marked Present when you punch out';
   } else {
@@ -211,6 +228,14 @@ function updateAttMsg(record) {
     myAttMsg.textContent = `${remH}h ${remM}m left to reach the ${targetWorkHours}h target for today`;
   }
 }
+
+
+
+
+
+
+
+
 setInterval(() => {
   if (window._lastAttRecord) updateAttMsg(window._lastAttRecord);
 }, 30000);
